@@ -16,17 +16,16 @@ class BankController:
         agency: str,
         engine: sa.engine.Engine,
     ):
-
         self.__name = name
         self.__agency = agency
         self.__engine = engine
         self.__connection = engine.connect()
         self.__session = sessionmaker(bind=self.__connection)()
         self.__loggedAccount = None
-        self.__personLogged = None
+        self.__loggedPerson = None
 
     @classmethod
-    def factorybankControllerWithNameAndAgency(cls, name: str, agency: str):
+    def factoryWithNameAndAgency(cls, name: str, agency: str):
 
         dataBaseName = name.lower().replace(' ', '')
 
@@ -42,7 +41,7 @@ class BankController:
         return cls(name, agency, engine)
 
     @classmethod
-    def factorybankControllerWithEngine(
+    def factoryWithEngine(
         cls,
         name: str,
         agency: str,
@@ -154,7 +153,7 @@ class BankController:
                 PersonEntity.person_id == accountResult.person_id, ).one()
 
             self.__loggedAccount = AccountModel.fromEntity(accountResult)
-            self.__personLogged = PersonModel.fromEntity(personResult)
+            self.__loggedPerson = PersonModel.fromEntity(personResult)
             result = True
         except Exception as e:
             print(e)
@@ -211,6 +210,20 @@ class BankController:
                 AccountEntity.account_name == accountName, ).one()
 
             result = AccountModel.fromEntity(accountResult)
+        except Exception as e:
+            print(e)
+
+        return result
+
+    def accountsByStringInName(self, string: str) -> list[AccountModel]:
+        result = []
+
+        try:
+            accountResults = self.__session.query(AccountEntity).filter(
+                AccountEntity.account_name.like(f'%{string}%'), ).limit(10)
+
+            for accountResult in accountResults:
+                result.append(AccountModel.fromEntity(accountResult))
         except Exception as e:
             print(e)
 
@@ -369,17 +382,30 @@ class BankController:
         return result
 
     @property
+    def refreshLoggedAccount(self):
+        """ Atualiza a conta logada """
+        if self.__loggedPerson is not None:
+            self.__loggedPerson = self.personByCpf(self.__loggedPerson.cpf)
+
+        if self.__loggedAccount is not None:
+            self.__loggedAccount = self.accountByPersonId(
+                self.__loggedAccount.personId)
+
+    @property
     def isLogged(self) -> bool:
         return (self.__loggedAccount is not None
-                and self.__personLogged is not None)
+                and self.__loggedPerson is not None)
 
     @property
     def loggedAccount(self) -> AccountModel | None:
+        # Atualiza a conta logada
+        self.refreshLoggedAccount
+
         return self.__loggedAccount
 
     @property
     def loggedPerson(self) -> PersonModel | None:
-        return self.__personLogged
+        return self.__loggedPerson
 
     def addLog(self, account: AccountModel, message: str, logType: str):
         log = LogModel.factoryLogModel(
@@ -413,6 +439,9 @@ class BankController:
     @property
     def loggedAccountLogs(self) -> list[LogModel]:
         result = []
+
+        # Atualiza a conta logada
+        self.refreshLoggedAccount
 
         if self.loggedAccount is not None:
             result = self.accountLogs(self.loggedAccount)
