@@ -1,6 +1,6 @@
 import json
 import socket
-
+from threading import Lock
 
 from ..commands.login import login
 from ..commands.deposit import deposit
@@ -8,18 +8,36 @@ from ..commands.register import register
 from ..commands.withdraw import withdraw
 from ..commands.transfer import transfer
 from ..commands.logged_account_infos import loggedAccountInfos
+from ..commands.search_accounts import searchAccounts
 from .bank_controller import BankController
 
 
 class ClientBackController:
-    def __init__(self, client, address, bankName, bankAgency, engine):
+    def __init__(
+            self,
+            client,
+            address,
+            bankName,
+            bankAgency,
+            engine,
+    ):
         self.__client: socket.socket = client
         self.__address = address
         self.__buffer_size = 1024
 
-        self.__bank = BankController.factorybankControllerWithEngine(
-            bankName, bankAgency, engine,
+        # self.__bank = BankController.factoryWithEngine(
+        #     bankName, bankAgency, engine,
+        # )
+
+        self.__bank = BankController(
+            name=bankName,
+            agency=bankAgency,
+            engine=engine,
         )
+
+        # self.__bank = BankController.factoryWithNameAndAgency(
+        #     bankName, bankAgency,
+        # )
 
         self.commands = {
             'login': login,
@@ -28,9 +46,10 @@ class ClientBackController:
             'deposit': deposit,
             'withdraw': withdraw,
             'transfer': transfer,
+            'searchAccounts': searchAccounts,
         }
 
-    def start(self):
+    def start(self, lock: Lock):
         while True:
             data = self.receive()
 
@@ -43,7 +62,16 @@ class ClientBackController:
                 print(
                     f'Cliente { self.__address } | comando {data["command"]}',
                 )
+
+                """ O lock é usado para evitar que duas threads
+                acessem o banco de dados ao mesmo tempo.
+
+                Apesar de não ser necessário devido as propriedades ACID
+                do banco de dados, é uma boa prática de programação."""
+                lock.acquire()
                 response = self.commands[data['command']](data, self.__bank)
+                lock.release()
+
                 self.send(response)
             else:
                 self.send({'status': 'command not found'})
@@ -72,5 +100,4 @@ class ClientBackController:
                 break
 
         data = data[:-3]
-
         return json.loads(data)
