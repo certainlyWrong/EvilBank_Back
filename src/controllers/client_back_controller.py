@@ -13,6 +13,34 @@ from .bank_controller import BankController
 
 
 class ClientBackController:
+    """
+    Client back controller
+
+    ...
+
+    Parameters
+    ----------
+    client : socket.socket
+        Client socket
+    address : tuple
+        Client address
+    bankName : str
+        Bank name
+    bankAgency : str
+        Bank agency
+    engine : sqlalchemy.engine.Engine
+        Database engine
+
+    Methods
+    -------
+    start(lock: threading.Lock)
+        Start the client back controller
+    send(data: dict)
+        Send data to the client
+    receive() -> dict
+        Receive data from the client
+    """
+
     def __init__(
             self,
             client,
@@ -50,6 +78,18 @@ class ClientBackController:
         }
 
     def start(self, lock: Lock):
+        """
+        Start the client back controller
+
+        Parameters
+        ----------
+        lock : threading.Lock
+            Lock to avoid database access at the same time
+
+        Returns
+        -------
+        None
+        """
         while True:
             data = self.receive()
 
@@ -77,8 +117,18 @@ class ClientBackController:
                 self.send({'status': 'command not found'})
 
     def send(self, data):
-        # Envia um json em pacotes de 1024 bytes
-        # "end" é uma flag que indica o fim da mensagem
+        """
+        Send data to the client
+
+        Parameters
+        ----------
+        data : dict
+            Data to send
+
+        Returns
+        -------
+        None
+        """
 
         dataStr = json.dumps(data)
 
@@ -88,8 +138,14 @@ class ClientBackController:
         self.__client.send('end'.encode('utf-8'))
 
     def receive(self) -> dict[str, str]:
-        # Recebe um json em pacotes de 1024 bytes
-        # "end" é uma flag que indica o fim da mensagem
+        """
+        Receive data from the client
+
+        Returns
+        -------
+        dict[str, str]
+            Data received
+        """
 
         data = ''
 

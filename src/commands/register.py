@@ -3,6 +3,17 @@ from ..controllers.bank_controller import BankController
 
 
 def register(data: dict, bank: BankController):
+    """
+    Register a new account
+
+    Parameters:
+        data (dict): Data from the request
+        bank (BankController): Bank controller
+
+    Returns:
+        dict: Response data
+
+    """
 
     result = {'status': 'error'}
 

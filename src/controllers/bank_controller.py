@@ -9,6 +9,55 @@ from ..entities import Base
 
 
 class BankController:
+    """
+    A class used to represent a BankController
+
+    ...
+
+    Attributes
+    ----------
+    __name : str
+        the name of the bank
+    __agency : str
+        the agency of the bank
+    __engine : sa.engine.Engine
+        the engine of the bank
+    __connection : sa.engine.Connection
+        the connection of the bank
+    __session : sa.orm.session.Session
+        the session of the bank
+    __loggedAccount : AccountModel
+        the logged account of the bank
+    __loggedPerson : PersonModel
+        the logged person of the bank
+
+    Methods
+    -------
+    factoryWithNameAndAgency(name: str, agency: str)
+        Creates a new BankController with a name and agency
+    factoryWithEngine(name: str, agency: str, engine: sa.engine.Engine)
+        Creates a new BankController with a name, agency and engine
+    dispose()
+        Disposes the BankController
+    createAccount(personFirstName: str, personLastName: str, age: int, cpf: str, accountName: str, accountPassword: str, accountBalance: float, accountLimit: float, commit: bool = False)
+        Creates a new account
+    createPerson(firstName: str, lastName: str, age: int, cpf: str, commit: bool = False)
+        Creates a new person
+    login(accountName: str, accountPassword: str)
+        Logs in the bank
+    accountById(accountId: str)
+        Gets an account by id
+    personByCpf(cpf: str)
+        Gets a person by cpf
+    checkAccountNameExists(accountName: str)
+        Checks if an account name exists
+    checkPersonCpfExists(cpf: str)
+        Checks if a person cpf exists
+    saveEntity(entity: Base)
+        Saves an entity
+    saveLog(log: LogModel)
+        Saves a log
+    """
 
     def __init__(
         self,
@@ -26,6 +75,22 @@ class BankController:
 
     @classmethod
     def factoryWithNameAndAgency(cls, name: str, agency: str):
+        """
+        Creates a new BankController with a name and agency
+
+        Parameters
+        ----------
+        name : str
+            the name of the bank
+        agency : str
+            the agency of the bank
+
+        Returns
+        -------
+        BankController
+            the new BankController
+
+        """
 
         dataBaseName = name.lower().replace(' ', '')
 
@@ -47,11 +112,31 @@ class BankController:
         agency: str,
         engine: sa.engine.Engine
     ):
+        """
+        Creates a new BankController with a name, agency and engine
+
+        Parameters
+        ----------
+        name : str
+            the name of the bank
+        agency : str
+            the agency of the bank
+        engine : sa.engine.Engine
+            the engine of the bank
+
+        Returns
+        -------
+        BankController
+            the new BankController
+        """
         Base.metadata.create_all(engine)
 
         return cls(name, agency, engine)
 
     def dispose(self):
+        """
+        Disposes the BankController
+        """
         self.__engine.execute('DROP DATABASE IF EXISTS evilbanktest')
         self.__session.close()
         self.__connection.close()
@@ -69,12 +154,42 @@ class BankController:
         accountLimit: float,
         commit: bool = False,
     ):
+        """
+        Creates a new account
+
+        Parameters
+        ----------
+        personFirstName : str
+            the first name of the person
+        personLastName : str
+            the last name of the person
+        age : int
+            the age of the person
+        cpf : str
+            the cpf of the person
+        accountName : str
+            the name of the account
+        accountPassword : str
+            the password of the account
+        accountBalance : float
+            the balance of the account
+        accountLimit : float
+            the limit of the account
+        commit : bool, optional
+            if the account should be commited, by default False
+
+        Returns
+        -------
+        AccountModel
+            the new account
+
+        """
         result = None
 
         if (not personFirstName.isnumeric()
-                and len(personFirstName + personLastName) > 10
-                and len(personFirstName) < 255 and cpf.isnumeric()
-                and len(cpf) == 11
+            and len(personFirstName + personLastName) > 10
+            and len(personFirstName) < 255 and cpf.isnumeric()
+            and len(cpf) == 11
                 and self.checkAccountNameExists(accountName) is False):
 
             person = self.createPerson(
@@ -85,25 +200,25 @@ class BankController:
                 commit,
             )
 
-            accountHash = hashlib.sha256(
-                accountPassword.encode()).hexdigest()
+        accountHash = hashlib.sha256(
+            accountPassword.encode()).hexdigest()
 
-            if person is not None:
-                account = AccountModel.factoryAccountModel(
-                    person.personId,
-                    accountName,
-                    accountHash,
-                    accountBalance,
-                    accountLimit,
-                )
+        if person is not None:
+            account = AccountModel.factoryAccountModel(
+                person.personId,
+                accountName,
+                accountHash,
+                accountBalance,
+                accountLimit,
+            )
 
-                if commit and account is not None:
-                    saveResult = self.saveEntity(account.toEntity())
+            if commit and account is not None:
+                saveResult = self.saveEntity(account.toEntity())
 
-                    if saveResult:
-                        result = account
-                elif account is not None:
+                if saveResult:
                     result = account
+            elif account is not None:
+                result = account
 
         return result
 
@@ -113,6 +228,27 @@ class BankController:
                      age: int,
                      cpf: str,
                      commit: bool = False):
+        """
+        Creates a new person
+
+        Parameters
+        ----------
+        firstName : str
+            the first name of the person
+        lastName : str
+            the last name of the person
+        age : int
+            the age of the person
+        cpf : str
+            the cpf of the person
+        commit : bool, optional
+            if the person should be commited, by default False
+
+        Returns
+        -------
+        PersonModel
+            the new person
+        """
         result = None
 
         if (cpf.isnumeric() and isinstance(age, int)):
@@ -139,6 +275,21 @@ class BankController:
         accountName: str,
         accountPassword: str,
     ) -> bool:
+        """
+        Logs in an account
+
+        Parameters
+        ----------
+        accountName : str
+            the name of the account
+        accountPassword : str
+            the password of the account
+
+        Returns
+        -------
+        bool
+            if the login was successful
+        """
         result = False
 
         accountHash = hashlib.sha256(accountPassword.encode()).hexdigest()
@@ -161,6 +312,19 @@ class BankController:
         return result
 
     def accountById(self, accountId: str):
+        """
+        Gets an account by its id
+
+        Parameters
+        ----------
+        accountId : str
+            the id of the account
+
+        Returns
+        -------
+        AccountModel
+            the account
+        """
         result = None
 
         try:
@@ -175,6 +339,19 @@ class BankController:
 
     # TODO: testar
     def personByCpf(self, cpf: str):
+        """
+        Gets a person by its cpf
+
+        Parameters
+        ----------
+        cpf : str
+            the cpf of the person
+
+        Returns
+        -------
+        PersonModel
+            the person
+        """
         result = None
 
         try:
@@ -189,6 +366,19 @@ class BankController:
 
     # TODO: testar
     def accountByPersonId(self, personId: int):
+        """
+        Gets an account by its person id
+
+        Parameters
+        ----------
+        personId : int
+            the id of the person
+
+        Returns
+        ------- 
+        AccountModel
+            the account
+        """
         result = None
 
         try:
@@ -203,6 +393,19 @@ class BankController:
 
     # TODO: testar
     def accountByName(self, accountName: str):
+        """
+        Gets an account by its name
+
+        Parameters
+        ----------
+        accountName : str
+            the name of the account
+
+        Returns
+        -------
+        AccountModel
+            the account
+        """
         result = None
 
         try:
@@ -216,6 +419,19 @@ class BankController:
         return result
 
     def accountsByStringInName(self, string: str) -> list[AccountModel]:
+        """
+        Gets a list of accounts that have a string in their name
+
+        Parameters
+        ----------
+        string : str
+            the string to search for
+
+        Returns
+        -------
+        list[AccountModel]
+            the list of accountsf
+        """
         result = []
 
         try:
@@ -234,6 +450,19 @@ class BankController:
         ...
 
     def checkAccountNameExists(self, accountName: str):
+        """
+        Checks if an account name exists
+
+        Parameters
+        ----------
+        accountName : str
+            the name of the account
+
+        Returns
+        -------
+        bool
+            if the account name exists
+        """
         result = False
 
         try:
@@ -249,6 +478,19 @@ class BankController:
 
     # TODO: testar
     def checkAccountNameExistsByPersonId(self, accountName: str):
+        """
+        Checks if an account name exists
+
+        Parameters
+        ----------
+        accountName : str
+            the name of the account
+
+        Returns
+        ------- 
+        bool
+            if the account name exists
+        """
         result = False
 
         try:
@@ -263,6 +505,22 @@ class BankController:
         return result
 
     def withdraw(self, account: AccountModel, value: float) -> bool:
+        """
+        Withdraws money from an account
+
+        Parameters
+        ----------
+        account : AccountModel
+            the account
+        value : float
+            the value to withdraw
+
+        Returns
+        -------
+        bool
+            if the withdraw was successful
+
+        """
         result = False
 
         if (account is not None and value > 0 and account.balance >= value):
@@ -278,6 +536,21 @@ class BankController:
         return result
 
     def deposit(self, account: AccountModel, value: float) -> bool:
+        """
+        Deposits money into an account
+
+        Parameters
+        ----------
+        account : AccountModel
+            the account
+        value : float
+            the value to deposit
+
+        Returns
+        -------
+        bool
+            if the deposit was successful
+        """
         result = False
 
         if (account is not None and value > 0):
@@ -298,6 +571,23 @@ class BankController:
         accountTo: AccountModel,
         value: float,
     ) -> bool:
+        """
+        Transfers money from one account to another
+
+        Parameters
+        ----------
+        accountFrom : AccountModel
+            the account to transfer from
+        accountTo : AccountModel
+            the account to transfer to
+        value : float
+            the value to transfer
+
+        Returns
+        -------
+        bool
+            if the transfer was successful
+        """
         result = False
 
         if (accountFrom is not None and accountTo is not None and value > 0
@@ -328,6 +618,23 @@ class BankController:
         accountToName: str,
         value: float,
     ) -> bool:
+        """
+        Transfers money from one account to another
+
+        Parameters
+        ----------
+        accountFrom : AccountModel
+            the account to transfer from
+        accountToName : str
+            the name of the account to transfer to
+        value : float
+            the value to transfer
+
+        Returns
+        -------
+        bool
+            if the transfer was successful
+        """
         result = False
 
         if (accountFrom is not None and accountToName is not None and value > 0
@@ -341,6 +648,19 @@ class BankController:
 
     # TODO: testar
     def saveEntity(self, entity: Base) -> bool:
+        """
+        Saves an entity
+
+        Parameters
+        ----------
+        entity : Base
+            the entity to save
+
+        Returns
+        -------
+        bool
+            if the entity was saved
+        """
         result = False
 
         try:
@@ -355,6 +675,19 @@ class BankController:
 
     # TODO: testar
     def updateEntity(self, entity: Base) -> bool:
+        """
+        Updates an entity
+
+        Parameters
+        ----------
+        entity : Base
+            the entity to update
+
+        Returns
+        -------
+        bool
+            if the entity was updated
+        """
         result = False
 
         try:
@@ -369,6 +702,19 @@ class BankController:
 
     # TODO: testar
     def deleteEntity(self, entity: Base) -> bool:
+        """
+        Deletes an entity
+
+        Parameters
+        ----------
+        entity : Base
+            the entity to delete
+
+        Returns
+        -------
+        bool
+            if the entity was deleted
+        """
         result = False
 
         try:
@@ -383,7 +729,13 @@ class BankController:
 
     @property
     def refreshLoggedAccount(self):
-        """ Atualiza a conta logada """
+        """
+        Refreshes the logged account
+
+        Returns
+        -------
+        None
+        """
         if self.__loggedPerson is not None:
             self.__loggedPerson = self.personByCpf(self.__loggedPerson.cpf)
 
@@ -393,21 +745,61 @@ class BankController:
 
     @property
     def isLogged(self) -> bool:
+        """
+        Checks if the user is logged
+
+        Returns
+        -------
+        bool
+            if the user is logged
+        """
         return (self.__loggedAccount is not None
                 and self.__loggedPerson is not None)
 
     @property
     def loggedAccount(self) -> AccountModel | None:
-        # Atualiza a conta logada
+        """
+        Gets the logged account
+
+        Returns
+        -------
+        AccountModel | None
+            the logged account
+        """
         self.refreshLoggedAccount
 
         return self.__loggedAccount
 
     @property
     def loggedPerson(self) -> PersonModel | None:
+        """
+        Gets the logged person
+
+        Returns
+        -------
+        PersonModel | None
+            the logged person
+        """
         return self.__loggedPerson
 
     def addLog(self, account: AccountModel, message: str, logType: str):
+        """
+        Adds a log to an account
+
+        Parameters
+        ----------
+        account : AccountModel
+            the account
+        message : str
+            the message
+        logType : str
+            the log type
+
+        Returns
+        -------
+        None
+
+        """
         log = LogModel.factoryLogModel(
             accountId=account.accountId,
             logMessage=message,
@@ -418,6 +810,19 @@ class BankController:
             self.saveEntity(log.toEntity())
 
     def accountLogs(self, account: AccountModel) -> list[LogModel]:
+        """
+        Gets the logs of an account
+
+        Parameters
+        ----------
+        account : AccountModel
+            the account
+
+        Returns
+        -------
+        list[LogModel] 
+            the logs of the account
+        """
         result = []
 
         try:
@@ -438,6 +843,14 @@ class BankController:
 
     @property
     def loggedAccountLogs(self) -> list[LogModel]:
+        """
+        Gets the logs of the logged account
+
+        Returns
+        -------
+        list[LogModel]
+            the logs of the logged account
+        """
         result = []
 
         # Atualiza a conta logada

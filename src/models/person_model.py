@@ -5,6 +5,35 @@ from ..entities.person_entity import PersonEntity
 
 
 class PersonModel:
+    """
+    Person model
+
+    ...
+
+    Parameters
+    ----------
+    personId : str
+        Person id
+    firstName : str
+        Person first name
+    lastName : str
+        Person last name
+    age : int
+        Person age
+    cpf : str
+        Person cpf
+
+    Methods
+    -------
+    factoryPersonModel(firstName: str, lastName: str, age: int, cpf: str) -> PersonModel
+        Factory method to create a person model
+    fromEntity(personEntity: PersonEntity) -> PersonModel
+        Create a person model from a person entity
+    toDict() -> dict
+        Create a dict from the person model
+    toEntity() -> PersonEntity
+        Create a person entity from the person model
+    """
 
     def __init__(
         self,
@@ -28,6 +57,25 @@ class PersonModel:
         age: int,
         cpf: str,
     ):
+        """
+        Factory method to create a person model
+
+        Parameters
+        ----------
+        firstName : str
+            Person first name
+        lastName : str
+            Person last name
+        age : int
+            Person age
+        cpf : str
+            Person cpf
+
+        Returns
+        -------
+        PersonModel
+            Person model
+        """
         result = None
 
         # validar cpf, age, personName
@@ -47,6 +95,14 @@ class PersonModel:
 
     @classmethod
     def empty(cls) -> 'PersonModel':
+        """
+        Create an empty person model
+
+        Returns
+        -------
+        PersonModel
+            Person model
+        """
         return cls(
             str(uuid4()),
             '',
@@ -57,6 +113,19 @@ class PersonModel:
 
     @classmethod
     def fromEntity(cls, personEntity: PersonEntity) -> 'PersonModel':
+        """
+        Create a person model from a person entity
+
+        Parameters
+        ----------
+        personEntity : PersonEntity
+            Person entity
+
+        Returns
+        -------
+        PersonModel
+            Person model
+        """
         return cls(
             personEntity.person_id,  # type: ignore
             personEntity.person_first_name,  # type: ignore
@@ -66,6 +135,14 @@ class PersonModel:
         )
 
     def toEntity(self) -> PersonEntity:
+        """
+        Create a person entity from the person model
+
+        Returns
+        -------
+        PersonEntity
+            Person entity
+        """
         return PersonEntity(
             person_id=self.personId,
             person_first_name=self.firstName,
@@ -75,6 +152,14 @@ class PersonModel:
         )
 
     def toDict(self) -> dict:
+        """
+        Create a dict from the person model
+
+        Returns
+        -------
+        dict
+            Person model dict
+        """
         return {
             'personId': self.personId,
             'firstName': self.firstName,
@@ -96,6 +181,19 @@ class PersonModel:
         )
 
     def fromJson(self, personJson: str):
+        """
+        Create a person model from a json
+
+        Parameters
+        ----------
+        personJson : str
+            Person json
+
+        Returns
+        -------
+        PersonModel
+            Person model
+        """
         return self.fromDict(json.loads(personJson))
 
     @property

@@ -4,16 +4,29 @@ import threading as td
 import sqlalchemy as sa
 from .client_back_controller import ClientBackController
 
-"""
-Uma classe que representa um controlador de serviço.
-
-Ela permite que o usuário possa iniciar,
-parar e reiniciar o uso do serviço do banco.
-A comunicação com o serviço é feita através de sockets e json.
-"""
-
 
 class ServiceController:
+    """
+    Service controller
+
+    ...
+
+    Parameters
+    ----------
+    bankName : str
+        Bank name
+    bankAgency : str
+        Bank agency
+
+    Methods
+    -------
+    start()
+        Start the service
+    stop()
+        Stop the service
+
+    """
+
     def __init__(self):
         self.__host = '0.0.0.0'
         self.__port = 8000
@@ -33,6 +46,13 @@ class ServiceController:
         self.__lock = td.Lock()
 
     def start(self):
+        """
+        Start the service
+
+        Returns
+        -------
+        None
+        """
         print('Start service')
         while True:
             client, address = self.__socket.accept()
@@ -62,6 +82,19 @@ class ServiceController:
     #             self.__threads.remove(thread)
 
     def __createEngine(self, name):
+        """
+        Create a database engine
+
+        Parameters
+        ----------
+        name : str
+            Database name
+
+        Returns
+        -------
+        sqlalchemy.engine.Engine
+            Database engine
+        """
         dataBaseName = name.lower().replace(' ', '')
 
         engine = sa.create_engine(

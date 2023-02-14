@@ -5,6 +5,39 @@ from ..entities.account_entity import AccountEntity
 
 
 class AccountModel:
+    """
+    Account model
+
+    ...
+
+    Parameters
+    ----------
+    accountId : str
+        Account id
+    personId : str
+        Person id
+    accountName : str
+        Account name
+    accountHash : str
+        Account hash
+    balance : float
+        Account balance
+    limit : float
+        Account limit
+
+    Methods
+    -------
+    factoryAccountModel(clientId: str, accountName: str, accountHash: str, balance: float, limit: float) -> AccountModel
+        Factory method to create an account model
+    empty() -> AccountModel
+        Create an empty account model
+    fromEntity(accountEntity: AccountEntity) -> AccountModel
+        Create an account model from an account entity
+    toDict() -> dict
+        Create a dict from the account model
+    toEntity() -> AccountEntity
+        Create an account entity from the account model
+    """
 
     def __init__(
         self,
@@ -31,6 +64,27 @@ class AccountModel:
         balance: float,
         limit: float,
     ):
+        """
+        Factory method to create an account model
+
+        Parameters
+        ----------
+        clientId : str
+            Client id
+        accountName : str
+            Account name
+        accountHash : str
+            Account hash
+        balance : float
+            Account balance
+        limit : float
+            Account limit
+
+        Returns
+        -------
+        AccountModel
+            Account model
+        """
         result = None
 
         if accountName.isalpha():
@@ -50,6 +104,15 @@ class AccountModel:
 
     @classmethod
     def empty(cls) -> 'AccountModel':
+        """
+        Create an empty account model
+
+        Returns
+        -------
+        AccountModel
+            Account model
+
+        """
         return cls(
             str(uuid4()),
             str(uuid4()),
@@ -61,6 +124,20 @@ class AccountModel:
 
     @classmethod
     def fromEntity(cls, accountEntity: AccountEntity) -> 'AccountModel':
+        """
+        Create an account model from an account entity
+
+        Parameters
+        ----------
+        accountEntity : AccountEntity
+            Account entity
+
+        Returns
+        -------
+        AccountModel
+            Account model
+
+        """
 
         return cls(
             accountEntity.account_id,  # type: ignore
@@ -72,6 +149,14 @@ class AccountModel:
         )
 
     def toEntity(self) -> AccountEntity:
+        """
+        Create an account entity from the account model
+
+        Returns
+        -------
+        AccountEntity
+            Account entity
+        """
         return AccountEntity(
             account_id=self.accountId,
             person_id=self.personId,
@@ -82,6 +167,14 @@ class AccountModel:
         )
 
     def toDict(self) -> dict:
+        """
+        Create a dict from the account model
+
+        Returns
+        -------
+        dict
+            Account model as dict
+        """
         return {
             'accountId': self.accountId,
             'personId': self.personId,
@@ -92,9 +185,30 @@ class AccountModel:
         }
 
     def toJson(self) -> str:
+        """
+        Create a json from the account model
+
+        Returns
+        -------
+        str
+            Account model as json
+        """
         return json.dumps(self.toDict())
 
     def fromDict(self, data: dict):
+        """
+        Create an account model from a dict
+
+        Parameters
+        ----------
+        data : dict
+            Data to create the account model
+
+        Returns
+        -------
+        AccountModel
+            Account model
+        """
         return AccountModel(
             data['accountId'],
             data['personId'],
@@ -105,6 +219,19 @@ class AccountModel:
         )
 
     def fromJson(self, data: str):
+        """
+        Create an account model from a json
+
+        Parameters
+        ----------
+        data : str
+            Data to create the account model
+
+        Returns
+        -------
+        AccountModel
+            Account model
+        """
         return self.fromDict(json.loads(data))
 
     @property
