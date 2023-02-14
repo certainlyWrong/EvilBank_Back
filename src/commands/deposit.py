@@ -7,4 +7,4 @@ def deposit(data, bank: BankController):
     account = bank.loggedAccount
     if account:
         result = bank.deposit(account, data['value'])
-    return {'status': 'success' if result else 'fail'}
+    return {'status': 'success' if result else 'failed'}

@@ -6,4 +6,4 @@ def withdraw(data, bank: BankController):
     account = bank.loggedAccount
     if account:
         result = bank.withdraw(account, data['value'])
-    return {'status': 'success' if result else 'fail'}
+    return {'status': 'success' if result else 'failed'}

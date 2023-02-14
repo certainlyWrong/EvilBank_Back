@@ -10,4 +10,4 @@ def transfer(data, bank: BankController):
     if accountLogged:
         result = bank.transferByAccountName(accountLogged, accountName, value)
 
-    return {'status': 'success' if result else 'fail'}
+    return {'status': 'success' if result else 'failed'}
