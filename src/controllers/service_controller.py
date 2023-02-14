@@ -17,13 +17,20 @@ class ServiceController:
     def __init__(self):
         self.__host = '0.0.0.0'
         self.__port = 8000
-        self.__buffer_size = 1024
 
         self.__threads = []
+
+        self.bankAgency = '1234'
+        self.bankName = 'evil bank'
+
+        self.__engine = self.__createEngine(self.bankName)
+        self.__connection = self.__engine.connect()
 
         self.__socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.__socket.bind((self.__host, self.__port))
         self.__socket.listen(10)
+
+        self.__lock = td.Lock()
 
     def start(self):
         print('Start service')
@@ -34,19 +41,16 @@ class ServiceController:
             if client:
                 print(f'Cliente conectado: {address}')
 
-                bankName = 'evil bank'
-                bankAgency = '1234'
-
-                engine = self.createEngine(bankName)
-
                 # Criar uma nova thread para atender o cliente
                 client_thread = td.Thread(
                     target=ClientBackController(
                         client=client,
                         address=address,
-                        bankName=bankName,
-                        bankAgency=bankAgency,
-                        engine=engine).start,
+                        bankName=self.bankName,
+                        bankAgency=self.bankAgency,
+                        engine=self.__engine,
+                    ).start,
+                    args=(self.__lock,),
                 )
 
                 self.__threads.append(client_thread)
@@ -57,7 +61,7 @@ class ServiceController:
     #         if not thread.is_alive():
     #             self.__threads.remove(thread)
 
-    def createEngine(self, name):
+    def __createEngine(self, name):
         dataBaseName = name.lower().replace(' ', '')
 
         engine = sa.create_engine(
