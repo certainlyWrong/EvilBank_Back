@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.commands package &mdash; evilBank  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="src.controllers package" href="src.controllers.html" />
+    <link rel="prev" title="src package" href="src.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2a7b9b" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            evilBank
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="src.html">src package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="src.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">src.commands package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.controllers.html">src.controllers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.entities.html">src.entities package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.models.html">src.models package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#module-src">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2a7b9b" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">evilBank</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">src</a></li>
+          <li class="breadcrumb-item"><a href="src.html">src package</a></li>
+      <li class="breadcrumb-item active">src.commands package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/a/src.commands.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="src-commands-package">
+<h1>src.commands package<a class="headerlink" href="#src-commands-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-src.commands.deposit">
+<span id="src-commands-deposit-module"></span><h2>src.commands.deposit module<a class="headerlink" href="#module-src.commands.deposit" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.commands.deposit.deposit">
+<span class="sig-prename descclassname"><span class="pre">src.commands.deposit.</span></span><span class="sig-name descname"><span class="pre">deposit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bank</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/commands/deposit.html#deposit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.commands.deposit.deposit" title="Permalink to this definition"></a></dt>
+<dd><p>Deposit money to the bank account</p>
+<dl>
+<dt>Parameters:</dt><dd><p>data (dict): Data from the request</p>
+<p>bank (BankController): Bank controller</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict: Response data</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.commands.logged_account_infos">
+<span id="src-commands-logged-account-infos-module"></span><h2>src.commands.logged_account_infos module<a class="headerlink" href="#module-src.commands.logged_account_infos" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.commands.logged_account_infos.loggedAccountInfos">
+<span class="sig-prename descclassname"><span class="pre">src.commands.logged_account_infos.</span></span><span class="sig-name descname"><span class="pre">loggedAccountInfos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bank</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/commands/logged_account_infos.html#loggedAccountInfos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.commands.logged_account_infos.loggedAccountInfos" title="Permalink to this definition"></a></dt>
+<dd><p>Get logged account infos</p>
+<dl>
+<dt>Parameters:</dt><dd><p>data (dict): Data from the request</p>
+<p>bank (BankController): Bank controller</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict: Response data</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.commands.login">
+<span id="src-commands-login-module"></span><h2>src.commands.login module<a class="headerlink" href="#module-src.commands.login" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.commands.login.login">
+<span class="sig-prename descclassname"><span class="pre">src.commands.login.</span></span><span class="sig-name descname"><span class="pre">login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bank</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/src/commands/login.html#login"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.commands.login.login" title="Permalink to this definition"></a></dt>
+<dd><p>Login to the bank</p>
+<dl>
+<dt>Parameters:</dt><dd><p>data (dict): Data from the request</p>
+<p>bank (BankController): Bank controller</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict: Response data</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.commands.register">
+<span id="src-commands-register-module"></span><h2>src.commands.register module<a class="headerlink" href="#module-src.commands.register" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.commands.register.register">
+<span class="sig-prename descclassname"><span class="pre">src.commands.register.</span></span><span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bank</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/commands/register.html#register"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.commands.register.register" title="Permalink to this definition"></a></dt>
+<dd><p>Register a new account</p>
+<dl>
+<dt>Parameters:</dt><dd><p>data (dict): Data from the request</p>
+<p>bank (BankController): Bank controller</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict: Response data</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.commands.search_accounts">
+<span id="src-commands-search-accounts-module"></span><h2>src.commands.search_accounts module<a class="headerlink" href="#module-src.commands.search_accounts" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.commands.search_accounts.searchAccounts">
+<span class="sig-prename descclassname"><span class="pre">src.commands.search_accounts.</span></span><span class="sig-name descname"><span class="pre">searchAccounts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bank</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/src/commands/search_accounts.html#searchAccounts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.commands.search_accounts.searchAccounts" title="Permalink to this definition"></a></dt>
+<dd><p>Search accounts by string in name</p>
+<dl>
+<dt>Parameters:</dt><dd><p>data (dict): Data from the request</p>
+<p>bank (BankController): Bank controller</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict: Response data</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.commands.transfer">
+<span id="src-commands-transfer-module"></span><h2>src.commands.transfer module<a class="headerlink" href="#module-src.commands.transfer" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.commands.transfer.transfer">
+<span class="sig-prename descclassname"><span class="pre">src.commands.transfer.</span></span><span class="sig-name descname"><span class="pre">transfer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bank</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/commands/transfer.html#transfer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.commands.transfer.transfer" title="Permalink to this definition"></a></dt>
+<dd><p>Transfer money to another account</p>
+<dl>
+<dt>Parameters:</dt><dd><p>data (dict): Data from the request</p>
+<p>bank (BankController): Bank controller</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict: Response data</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.commands.withdraw">
+<span id="src-commands-withdraw-module"></span><h2>src.commands.withdraw module<a class="headerlink" href="#module-src.commands.withdraw" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.commands.withdraw.withdraw">
+<span class="sig-prename descclassname"><span class="pre">src.commands.withdraw.</span></span><span class="sig-name descname"><span class="pre">withdraw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bank</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/commands/withdraw.html#withdraw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.commands.withdraw.withdraw" title="Permalink to this definition"></a></dt>
+<dd><p>Withdraw money from the bank account</p>
+<dl>
+<dt>Parameters:</dt><dd><p>data (dict): Data from the request</p>
+<p>bank (BankController): Bank controller</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict: Response data</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.commands">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.commands" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="src.html" class="btn btn-neutral float-left" title="src package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="src.controllers.html" class="btn btn-neutral float-right" title="src.controllers package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Adriano R. de Sousa.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

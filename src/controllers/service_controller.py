@@ -2,7 +2,8 @@
 import socket
 import threading as td
 import sqlalchemy as sa
-from .client_back_controller import ClientBackController
+
+# from .client_back_controller import ClientBackController
 
 
 class ServiceController:

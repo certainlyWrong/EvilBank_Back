@@ -16,20 +16,14 @@ class BankController:
 
     Attributes
     ----------
-    __name : str
+    name : str
         the name of the bank
-    __agency : str
+    agency : str
         the agency of the bank
-    __engine : sa.engine.Engine
+    engine : sa.engine.Engine
         the engine of the bank
-    __connection : sa.engine.Connection
-        the connection of the bank
-    __session : sa.orm.session.Session
-        the session of the bank
-    __loggedAccount : AccountModel
-        the logged account of the bank
-    __loggedPerson : PersonModel
-        the logged person of the bank
+
+    ...
 
     Methods
     -------
@@ -647,7 +641,7 @@ class BankController:
         return result
 
     # TODO: testar
-    def saveEntity(self, entity: Base) -> bool:
+    def saveEntity(self, entity) -> bool:
         """
         Saves an entity
 
@@ -674,7 +668,7 @@ class BankController:
         return result
 
     # TODO: testar
-    def updateEntity(self, entity: Base) -> bool:
+    def updateEntity(self, entity) -> bool:
         """
         Updates an entity
 
@@ -701,7 +695,7 @@ class BankController:
         return result
 
     # TODO: testar
-    def deleteEntity(self, entity: Base) -> bool:
+    def deleteEntity(self, entity) -> bool:
         """
         Deletes an entity
 
@@ -757,7 +751,7 @@ class BankController:
                 and self.__loggedPerson is not None)
 
     @property
-    def loggedAccount(self) -> AccountModel | None:
+    def loggedAccount(self):
         """
         Gets the logged account
 
@@ -771,7 +765,7 @@ class BankController:
         return self.__loggedAccount
 
     @property
-    def loggedPerson(self) -> PersonModel | None:
+    def loggedPerson(self):
         """
         Gets the logged person
 

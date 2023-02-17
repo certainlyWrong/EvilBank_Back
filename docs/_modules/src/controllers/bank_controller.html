@@ -1,0 +1,961 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>src.controllers.bank_controller &#8212; evilBank  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for src.controllers.bank_controller</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">sqlalchemy</span> <span class="k">as</span> <span class="nn">sa</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">sessionmaker</span>
+
+<span class="kn">from</span> <span class="nn">..models.log_model</span> <span class="kn">import</span> <span class="n">LogModel</span><span class="p">,</span> <span class="n">LogEntity</span>
+<span class="kn">from</span> <span class="nn">..models.person_model</span> <span class="kn">import</span> <span class="n">PersonModel</span><span class="p">,</span> <span class="n">PersonEntity</span>
+<span class="kn">from</span> <span class="nn">..models.account_model</span> <span class="kn">import</span> <span class="n">AccountModel</span><span class="p">,</span> <span class="n">AccountEntity</span>
+<span class="kn">from</span> <span class="nn">..entities</span> <span class="kn">import</span> <span class="n">Base</span>
+
+
+<div class="viewcode-block" id="BankController"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController">[docs]</a><span class="k">class</span> <span class="nc">BankController</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A class used to represent a BankController</span>
+
+<span class="sd">    ...</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str</span>
+<span class="sd">        the name of the bank</span>
+<span class="sd">    agency : str</span>
+<span class="sd">        the agency of the bank</span>
+<span class="sd">    engine : sa.engine.Engine</span>
+<span class="sd">        the engine of the bank</span>
+
+<span class="sd">    ...</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    factoryWithNameAndAgency(name: str, agency: str)</span>
+<span class="sd">        Creates a new BankController with a name and agency</span>
+<span class="sd">    factoryWithEngine(name: str, agency: str, engine: sa.engine.Engine)</span>
+<span class="sd">        Creates a new BankController with a name, agency and engine</span>
+<span class="sd">    dispose()</span>
+<span class="sd">        Disposes the BankController</span>
+<span class="sd">    createAccount(personFirstName: str, personLastName: str, age: int, cpf: str, accountName: str, accountPassword: str, accountBalance: float, accountLimit: float, commit: bool = False)</span>
+<span class="sd">        Creates a new account</span>
+<span class="sd">    createPerson(firstName: str, lastName: str, age: int, cpf: str, commit: bool = False)</span>
+<span class="sd">        Creates a new person</span>
+<span class="sd">    login(accountName: str, accountPassword: str)</span>
+<span class="sd">        Logs in the bank</span>
+<span class="sd">    accountById(accountId: str)</span>
+<span class="sd">        Gets an account by id</span>
+<span class="sd">    personByCpf(cpf: str)</span>
+<span class="sd">        Gets a person by cpf</span>
+<span class="sd">    checkAccountNameExists(accountName: str)</span>
+<span class="sd">        Checks if an account name exists</span>
+<span class="sd">    checkPersonCpfExists(cpf: str)</span>
+<span class="sd">        Checks if a person cpf exists</span>
+<span class="sd">    saveEntity(entity: Base)</span>
+<span class="sd">        Saves an entity</span>
+<span class="sd">    saveLog(log: LogModel)</span>
+<span class="sd">        Saves a log</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">agency</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">engine</span><span class="p">:</span> <span class="n">sa</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">Engine</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__agency</span> <span class="o">=</span> <span class="n">agency</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__engine</span> <span class="o">=</span> <span class="n">engine</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__session</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="p">)()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__loggedAccount</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__loggedPerson</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="BankController.factoryWithNameAndAgency"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController.factoryWithNameAndAgency">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">factoryWithNameAndAgency</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">agency</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a new BankController with a name and agency</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : str</span>
+<span class="sd">            the name of the bank</span>
+<span class="sd">        agency : str</span>
+<span class="sd">            the agency of the bank</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        BankController</span>
+<span class="sd">            the new BankController</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">dataBaseName</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="n">engine</span> <span class="o">=</span> <span class="n">sa</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span>
+            <span class="s1">&#39;mysql+mysqlconnector://root:123456@localhost:3306&#39;</span><span class="p">)</span>
+        <span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;CREATE DATABASE IF NOT EXISTS </span><span class="si">{</span><span class="n">dataBaseName</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">engine</span> <span class="o">=</span> <span class="n">sa</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;mysql+mysqlconnector://root:123456@localhost:3306/</span><span class="si">{</span><span class="n">dataBaseName</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="p">)</span>
+
+        <span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">agency</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="BankController.factoryWithEngine"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController.factoryWithEngine">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">factoryWithEngine</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">agency</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">engine</span><span class="p">:</span> <span class="n">sa</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">Engine</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a new BankController with a name, agency and engine</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : str</span>
+<span class="sd">            the name of the bank</span>
+<span class="sd">        agency : str</span>
+<span class="sd">            the agency of the bank</span>
+<span class="sd">        engine : sa.engine.Engine</span>
+<span class="sd">            the engine of the bank</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        BankController</span>
+<span class="sd">            the new BankController</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">agency</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="BankController.dispose"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController.dispose">[docs]</a>    <span class="k">def</span> <span class="nf">dispose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disposes the BankController</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;DROP DATABASE IF EXISTS evilbanktest&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__engine</span><span class="o">.</span><span class="n">dispose</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="BankController.createAccount"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController.createAccount">[docs]</a>    <span class="k">def</span> <span class="nf">createAccount</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">personFirstName</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">personLastName</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">age</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">cpf</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">accountName</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">accountPassword</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">accountBalance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">accountLimit</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">commit</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a new account</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        personFirstName : str</span>
+<span class="sd">            the first name of the person</span>
+<span class="sd">        personLastName : str</span>
+<span class="sd">            the last name of the person</span>
+<span class="sd">        age : int</span>
+<span class="sd">            the age of the person</span>
+<span class="sd">        cpf : str</span>
+<span class="sd">            the cpf of the person</span>
+<span class="sd">        accountName : str</span>
+<span class="sd">            the name of the account</span>
+<span class="sd">        accountPassword : str</span>
+<span class="sd">            the password of the account</span>
+<span class="sd">        accountBalance : float</span>
+<span class="sd">            the balance of the account</span>
+<span class="sd">        accountLimit : float</span>
+<span class="sd">            the limit of the account</span>
+<span class="sd">        commit : bool, optional</span>
+<span class="sd">            if the account should be commited, by default False</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        AccountModel</span>
+<span class="sd">            the new account</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">personFirstName</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">()</span>
+            <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">personFirstName</span> <span class="o">+</span> <span class="n">personLastName</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span>
+            <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">personFirstName</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">255</span> <span class="ow">and</span> <span class="n">cpf</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">()</span>
+            <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">cpf</span><span class="p">)</span> <span class="o">==</span> <span class="mi">11</span>
+                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkAccountNameExists</span><span class="p">(</span><span class="n">accountName</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">):</span>
+
+            <span class="n">person</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">createPerson</span><span class="p">(</span>
+                <span class="n">personFirstName</span><span class="p">,</span>
+                <span class="n">personLastName</span><span class="p">,</span>
+                <span class="n">age</span><span class="p">,</span>
+                <span class="n">cpf</span><span class="p">,</span>
+                <span class="n">commit</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="n">accountHash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span>
+            <span class="n">accountPassword</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">person</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">account</span> <span class="o">=</span> <span class="n">AccountModel</span><span class="o">.</span><span class="n">factoryAccountModel</span><span class="p">(</span>
+                <span class="n">person</span><span class="o">.</span><span class="n">personId</span><span class="p">,</span>
+                <span class="n">accountName</span><span class="p">,</span>
+                <span class="n">accountHash</span><span class="p">,</span>
+                <span class="n">accountBalance</span><span class="p">,</span>
+                <span class="n">accountLimit</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">commit</span> <span class="ow">and</span> <span class="n">account</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">saveResult</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">saveEntity</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">toEntity</span><span class="p">())</span>
+
+                <span class="k">if</span> <span class="n">saveResult</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="n">account</span>
+            <span class="k">elif</span> <span class="n">account</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">account</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="BankController.createPerson"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController.createPerson">[docs]</a>    <span class="k">def</span> <span class="nf">createPerson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                     <span class="n">firstName</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                     <span class="n">lastName</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                     <span class="n">age</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                     <span class="n">cpf</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                     <span class="n">commit</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a new person</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        firstName : str</span>
+<span class="sd">            the first name of the person</span>
+<span class="sd">        lastName : str</span>
+<span class="sd">            the last name of the person</span>
+<span class="sd">        age : int</span>
+<span class="sd">            the age of the person</span>
+<span class="sd">        cpf : str</span>
+<span class="sd">            the cpf of the person</span>
+<span class="sd">        commit : bool, optional</span>
+<span class="sd">            if the person should be commited, by default False</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        PersonModel</span>
+<span class="sd">            the new person</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">cpf</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">()</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+
+            <span class="n">person</span> <span class="o">=</span> <span class="n">PersonModel</span><span class="o">.</span><span class="n">factoryPersonModel</span><span class="p">(</span>
+                <span class="n">firstName</span><span class="o">=</span><span class="n">firstName</span><span class="p">,</span>
+                <span class="n">lastName</span><span class="o">=</span><span class="n">lastName</span><span class="p">,</span>
+                <span class="n">age</span><span class="o">=</span><span class="n">age</span><span class="p">,</span>
+                <span class="n">cpf</span><span class="o">=</span><span class="n">cpf</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">commit</span> <span class="ow">and</span> <span class="n">person</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">personEntity</span> <span class="o">=</span> <span class="n">person</span><span class="o">.</span><span class="n">toEntity</span><span class="p">()</span>
+                <span class="n">saveResult</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">saveEntity</span><span class="p">(</span><span class="n">personEntity</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">saveResult</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="n">person</span>
+            <span class="k">elif</span> <span class="n">person</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">person</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="BankController.login"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController.login">[docs]</a>    <span class="k">def</span> <span class="nf">login</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">accountName</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">accountPassword</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Logs in an account</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        accountName : str</span>
+<span class="sd">            the name of the account</span>
+<span class="sd">        accountPassword : str</span>
+<span class="sd">            the password of the account</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            if the login was successful</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="n">accountHash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">accountPassword</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">accountResult</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">AccountEntity</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+                <span class="n">AccountEntity</span><span class="o">.</span><span class="n">account_name</span> <span class="o">==</span> <span class="n">accountName</span><span class="p">,</span>
+                <span class="n">AccountEntity</span><span class="o">.</span><span class="n">account_hash</span> <span class="o">==</span> <span class="n">accountHash</span><span class="p">,</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
+
+            <span class="n">personResult</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">PersonEntity</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+                <span class="n">PersonEntity</span><span class="o">.</span><span class="n">person_id</span> <span class="o">==</span> <span class="n">accountResult</span><span class="o">.</span><span class="n">person_id</span><span class="p">,</span> <span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__loggedAccount</span> <span class="o">=</span> <span class="n">AccountModel</span><span class="o">.</span><span class="n">fromEntity</span><span class="p">(</span><span class="n">accountResult</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__loggedPerson</span> <span class="o">=</span> <span class="n">PersonModel</span><span class="o">.</span><span class="n">fromEntity</span><span class="p">(</span><span class="n">personResult</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="BankController.accountById"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController.accountById">[docs]</a>    <span class="k">def</span> <span class="nf">accountById</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accountId</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets an account by its id</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        accountId : str</span>
+<span class="sd">            the id of the account</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        AccountModel</span>
+<span class="sd">            the account</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">accountResult</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">AccountEntity</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+                <span class="n">AccountEntity</span><span class="o">.</span><span class="n">account_id</span> <span class="o">==</span> <span class="n">accountId</span><span class="p">,</span> <span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
+
+            <span class="n">result</span> <span class="o">=</span> <span class="n">AccountModel</span><span class="o">.</span><span class="n">fromEntity</span><span class="p">(</span><span class="n">accountResult</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+    <span class="c1"># TODO: testar</span>
+<div class="viewcode-block" id="BankController.personByCpf"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController.personByCpf">[docs]</a>    <span class="k">def</span> <span class="nf">personByCpf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpf</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets a person by its cpf</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        cpf : str</span>
+<span class="sd">            the cpf of the person</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        PersonModel</span>
+<span class="sd">            the person</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">personResult</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">PersonEntity</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+                <span class="n">PersonEntity</span><span class="o">.</span><span class="n">person_cpf</span> <span class="o">==</span> <span class="n">cpf</span><span class="p">,</span> <span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
+
+            <span class="n">result</span> <span class="o">=</span> <span class="n">PersonModel</span><span class="o">.</span><span class="n">fromEntity</span><span class="p">(</span><span class="n">personResult</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+    <span class="c1"># TODO: testar</span>
+<div class="viewcode-block" id="BankController.accountByPersonId"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController.accountByPersonId">[docs]</a>    <span class="k">def</span> <span class="nf">accountByPersonId</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">personId</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets an account by its person id</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        personId : int</span>
+<span class="sd">            the id of the person</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        ------- </span>
+<span class="sd">        AccountModel</span>
+<span class="sd">            the account</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">accountResult</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">AccountEntity</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+                <span class="n">AccountEntity</span><span class="o">.</span><span class="n">person_id</span> <span class="o">==</span> <span class="n">personId</span><span class="p">,</span> <span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
+
+            <span class="n">result</span> <span class="o">=</span> <span class="n">AccountModel</span><span class="o">.</span><span class="n">fromEntity</span><span class="p">(</span><span class="n">accountResult</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+    <span class="c1"># TODO: testar</span>
+<div class="viewcode-block" id="BankController.accountByName"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController.accountByName">[docs]</a>    <span class="k">def</span> <span class="nf">accountByName</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accountName</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets an account by its name</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        accountName : str</span>
+<span class="sd">            the name of the account</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        AccountModel</span>
+<span class="sd">            the account</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">accountResult</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">AccountEntity</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+                <span class="n">AccountEntity</span><span class="o">.</span><span class="n">account_name</span> <span class="o">==</span> <span class="n">accountName</span><span class="p">,</span> <span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
+
+            <span class="n">result</span> <span class="o">=</span> <span class="n">AccountModel</span><span class="o">.</span><span class="n">fromEntity</span><span class="p">(</span><span class="n">accountResult</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="BankController.accountsByStringInName"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController.accountsByStringInName">[docs]</a>    <span class="k">def</span> <span class="nf">accountsByStringInName</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">AccountModel</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets a list of accounts that have a string in their name</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        string : str</span>
+<span class="sd">            the string to search for</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list[AccountModel]</span>
+<span class="sd">            the list of accountsf</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">accountResults</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">AccountEntity</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+                <span class="n">AccountEntity</span><span class="o">.</span><span class="n">account_name</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;%</span><span class="si">{</span><span class="n">string</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">),</span> <span class="p">)</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">accountResult</span> <span class="ow">in</span> <span class="n">accountResults</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">AccountModel</span><span class="o">.</span><span class="n">fromEntity</span><span class="p">(</span><span class="n">accountResult</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+    <span class="c1"># TODO: Implementar conta que busque um usuário pelo CPF</span>
+<div class="viewcode-block" id="BankController.accountByCPF"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController.accountByCPF">[docs]</a>    <span class="k">def</span> <span class="nf">accountByCPF</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpf</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AccountModel</span><span class="p">:</span>
+        <span class="o">...</span></div>
+
+<div class="viewcode-block" id="BankController.checkAccountNameExists"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController.checkAccountNameExists">[docs]</a>    <span class="k">def</span> <span class="nf">checkAccountNameExists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accountName</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks if an account name exists</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        accountName : str</span>
+<span class="sd">            the name of the account</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            if the account name exists</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">accountResult</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">AccountEntity</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+                <span class="n">AccountEntity</span><span class="o">.</span><span class="n">account_name</span> <span class="o">==</span> <span class="n">accountName</span><span class="p">,</span> <span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">accountResult</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+    <span class="c1"># TODO: testar</span>
+<div class="viewcode-block" id="BankController.checkAccountNameExistsByPersonId"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController.checkAccountNameExistsByPersonId">[docs]</a>    <span class="k">def</span> <span class="nf">checkAccountNameExistsByPersonId</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accountName</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks if an account name exists</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        accountName : str</span>
+<span class="sd">            the name of the account</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        ------- </span>
+<span class="sd">        bool</span>
+<span class="sd">            if the account name exists</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">accountResult</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">AccountEntity</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+                <span class="n">AccountEntity</span><span class="o">.</span><span class="n">account_name</span> <span class="o">==</span> <span class="n">accountName</span><span class="p">,</span> <span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">accountResult</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="BankController.withdraw"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController.withdraw">[docs]</a>    <span class="k">def</span> <span class="nf">withdraw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account</span><span class="p">:</span> <span class="n">AccountModel</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Withdraws money from an account</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        account : AccountModel</span>
+<span class="sd">            the account</span>
+<span class="sd">        value : float</span>
+<span class="sd">            the value to withdraw</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            if the withdraw was successful</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">account</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">account</span><span class="o">.</span><span class="n">balance</span> <span class="o">&gt;=</span> <span class="n">value</span><span class="p">):</span>
+            <span class="n">account</span><span class="o">.</span><span class="n">balance</span> <span class="o">-=</span> <span class="n">value</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">updateEntity</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">toEntity</span><span class="p">())</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">addLog</span><span class="p">(</span>
+                <span class="n">account</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Saque&#39;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="BankController.deposit"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController.deposit">[docs]</a>    <span class="k">def</span> <span class="nf">deposit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account</span><span class="p">:</span> <span class="n">AccountModel</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deposits money into an account</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        account : AccountModel</span>
+<span class="sd">            the account</span>
+<span class="sd">        value : float</span>
+<span class="sd">            the value to deposit</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            if the deposit was successful</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">account</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">account</span><span class="o">.</span><span class="n">balance</span> <span class="o">+=</span> <span class="n">value</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">updateEntity</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">toEntity</span><span class="p">())</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">addLog</span><span class="p">(</span>
+                <span class="n">account</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Deposito&#39;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="BankController.transfer"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController.transfer">[docs]</a>    <span class="k">def</span> <span class="nf">transfer</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">accountFrom</span><span class="p">:</span> <span class="n">AccountModel</span><span class="p">,</span>
+        <span class="n">accountTo</span><span class="p">:</span> <span class="n">AccountModel</span><span class="p">,</span>
+        <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Transfers money from one account to another</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        accountFrom : AccountModel</span>
+<span class="sd">            the account to transfer from</span>
+<span class="sd">        accountTo : AccountModel</span>
+<span class="sd">            the account to transfer to</span>
+<span class="sd">        value : float</span>
+<span class="sd">            the value to transfer</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            if the transfer was successful</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">accountFrom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">accountTo</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">0</span>
+                <span class="ow">and</span> <span class="n">accountFrom</span><span class="o">.</span><span class="n">balance</span> <span class="o">&gt;=</span> <span class="n">value</span><span class="p">):</span>
+            <span class="n">accountFrom</span><span class="o">.</span><span class="n">balance</span> <span class="o">-=</span> <span class="n">value</span>
+            <span class="n">accountTo</span><span class="o">.</span><span class="n">balance</span> <span class="o">+=</span> <span class="n">value</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">updateEntity</span><span class="p">(</span><span class="n">accountFrom</span><span class="o">.</span><span class="n">toEntity</span><span class="p">())</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">updateEntity</span><span class="p">(</span><span class="n">accountTo</span><span class="o">.</span><span class="n">toEntity</span><span class="p">())</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">addLog</span><span class="p">(</span>
+                <span class="n">accountFrom</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s1">&#39;Transferencia: </span><span class="si">{</span><span class="n">accountTo</span><span class="o">.</span><span class="n">accountName</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">addLog</span><span class="p">(</span>
+                <span class="n">accountTo</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s1">&#39;Transferencia: </span><span class="si">{</span><span class="n">accountFrom</span><span class="o">.</span><span class="n">accountName</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+    <span class="c1"># TODO: testar</span>
+<div class="viewcode-block" id="BankController.transferByAccountName"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController.transferByAccountName">[docs]</a>    <span class="k">def</span> <span class="nf">transferByAccountName</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">accountFrom</span><span class="p">:</span> <span class="n">AccountModel</span><span class="p">,</span>
+        <span class="n">accountToName</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Transfers money from one account to another</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        accountFrom : AccountModel</span>
+<span class="sd">            the account to transfer from</span>
+<span class="sd">        accountToName : str</span>
+<span class="sd">            the name of the account to transfer to</span>
+<span class="sd">        value : float</span>
+<span class="sd">            the value to transfer</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            if the transfer was successful</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">accountFrom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">accountToName</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">0</span>
+                <span class="ow">and</span> <span class="n">accountFrom</span><span class="o">.</span><span class="n">balance</span> <span class="o">&gt;=</span> <span class="n">value</span><span class="p">):</span>
+            <span class="n">accountTo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">accountByName</span><span class="p">(</span><span class="n">accountToName</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">accountTo</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transfer</span><span class="p">(</span><span class="n">accountFrom</span><span class="p">,</span> <span class="n">accountTo</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+    <span class="c1"># TODO: testar</span>
+<div class="viewcode-block" id="BankController.saveEntity"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController.saveEntity">[docs]</a>    <span class="k">def</span> <span class="nf">saveEntity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Saves an entity</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        entity : Base</span>
+<span class="sd">            the entity to save</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            if the entity was saved</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+    <span class="c1"># TODO: testar</span>
+<div class="viewcode-block" id="BankController.updateEntity"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController.updateEntity">[docs]</a>    <span class="k">def</span> <span class="nf">updateEntity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Updates an entity</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        entity : Base</span>
+<span class="sd">            the entity to update</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            if the entity was updated</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__session</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+    <span class="c1"># TODO: testar</span>
+<div class="viewcode-block" id="BankController.deleteEntity"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController.deleteEntity">[docs]</a>    <span class="k">def</span> <span class="nf">deleteEntity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes an entity</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        entity : Base</span>
+<span class="sd">            the entity to delete</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            if the entity was deleted</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__session</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">refreshLoggedAccount</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Refreshes the logged account</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__loggedPerson</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__loggedPerson</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">personByCpf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__loggedPerson</span><span class="o">.</span><span class="n">cpf</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__loggedAccount</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__loggedAccount</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">accountByPersonId</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__loggedAccount</span><span class="o">.</span><span class="n">personId</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">isLogged</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks if the user is logged</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            if the user is logged</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__loggedAccount</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">__loggedPerson</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">loggedAccount</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the logged account</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        AccountModel | None</span>
+<span class="sd">            the logged account</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">refreshLoggedAccount</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__loggedAccount</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">loggedPerson</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the logged person</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        PersonModel | None</span>
+<span class="sd">            the logged person</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__loggedPerson</span>
+
+<div class="viewcode-block" id="BankController.addLog"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController.addLog">[docs]</a>    <span class="k">def</span> <span class="nf">addLog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account</span><span class="p">:</span> <span class="n">AccountModel</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">logType</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a log to an account</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        account : AccountModel</span>
+<span class="sd">            the account</span>
+<span class="sd">        message : str</span>
+<span class="sd">            the message</span>
+<span class="sd">        logType : str</span>
+<span class="sd">            the log type</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log</span> <span class="o">=</span> <span class="n">LogModel</span><span class="o">.</span><span class="n">factoryLogModel</span><span class="p">(</span>
+            <span class="n">accountId</span><span class="o">=</span><span class="n">account</span><span class="o">.</span><span class="n">accountId</span><span class="p">,</span>
+            <span class="n">logMessage</span><span class="o">=</span><span class="n">message</span><span class="p">,</span>
+            <span class="n">logType</span><span class="o">=</span><span class="n">logType</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">log</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">saveEntity</span><span class="p">(</span><span class="n">log</span><span class="o">.</span><span class="n">toEntity</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="BankController.accountLogs"><a class="viewcode-back" href="../../../a/src.controllers.html#src.controllers.bank_controller.BankController.accountLogs">[docs]</a>    <span class="k">def</span> <span class="nf">accountLogs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account</span><span class="p">:</span> <span class="n">AccountModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">LogModel</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the logs of an account</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        account : AccountModel</span>
+<span class="sd">            the account</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list[LogModel] </span>
+<span class="sd">            the logs of the account</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">logs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">LogEntity</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+                <span class="n">LogEntity</span><span class="o">.</span><span class="n">account_id</span> <span class="o">==</span> <span class="n">account</span><span class="o">.</span><span class="n">accountId</span><span class="p">,</span> <span class="p">)</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+            <span class="n">logs</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span>
+                <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">log</span><span class="p">:</span> <span class="n">log</span><span class="o">.</span><span class="n">log_date</span><span class="p">,</span>
+                <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="n">logs</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">LogModel</span><span class="o">.</span><span class="n">fromEntity</span><span class="p">(</span><span class="n">log</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">loggedAccountLogs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">LogModel</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the logs of the logged account</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list[LogModel]</span>
+<span class="sd">            the logs of the logged account</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Atualiza a conta logada</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">refreshLoggedAccount</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">loggedAccount</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">accountLogs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loggedAccount</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;BankController(name=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s1">, agency=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__agency</span><span class="si">}</span><span class="s1">)&#39;</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">evilBank</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../a/modules.html">src</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Adriano R. de Sousa.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

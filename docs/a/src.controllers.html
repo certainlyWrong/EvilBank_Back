@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.controllers package &mdash; evilBank  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="src.entities package" href="src.entities.html" />
+    <link rel="prev" title="src.commands package" href="src.commands.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2a7b9b" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            evilBank
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="src.html">src package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="src.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="src.commands.html">src.commands package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">src.controllers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.entities.html">src.entities package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.models.html">src.models package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#module-src">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2a7b9b" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">evilBank</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">src</a></li>
+          <li class="breadcrumb-item"><a href="src.html">src package</a></li>
+      <li class="breadcrumb-item active">src.controllers package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/a/src.controllers.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="src-controllers-package">
+<h1>src.controllers package<a class="headerlink" href="#src-controllers-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-src.controllers.bank_controller">
+<span id="src-controllers-bank-controller-module"></span><h2>src.controllers.bank_controller module<a class="headerlink" href="#module-src.controllers.bank_controller" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.controllers.bank_controller.</span></span><span class="sig-name descname"><span class="pre">BankController</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Engine</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class used to represent a BankController</p>
+<p>…</p>
+<section id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>name<span class="classifier">str</span></dt><dd><p>the name of the bank</p>
+</dd>
+<dt>agency<span class="classifier">str</span></dt><dd><p>the agency of the bank</p>
+</dd>
+<dt>engine<span class="classifier">sa.engine.Engine</span></dt><dd><p>the engine of the bank</p>
+</dd>
+</dl>
+<p>…</p>
+</section>
+<section id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>factoryWithNameAndAgency(name: str, agency: str)</dt><dd><p>Creates a new BankController with a name and agency</p>
+</dd>
+<dt>factoryWithEngine(name: str, agency: str, engine: sa.engine.Engine)</dt><dd><p>Creates a new BankController with a name, agency and engine</p>
+</dd>
+<dt>dispose()</dt><dd><p>Disposes the BankController</p>
+</dd>
+<dt>createAccount(personFirstName: str, personLastName: str, age: int, cpf: str, accountName: str, accountPassword: str, accountBalance: float, accountLimit: float, commit: bool = False)</dt><dd><p>Creates a new account</p>
+</dd>
+<dt>createPerson(firstName: str, lastName: str, age: int, cpf: str, commit: bool = False)</dt><dd><p>Creates a new person</p>
+</dd>
+<dt>login(accountName: str, accountPassword: str)</dt><dd><p>Logs in the bank</p>
+</dd>
+<dt>accountById(accountId: str)</dt><dd><p>Gets an account by id</p>
+</dd>
+<dt>personByCpf(cpf: str)</dt><dd><p>Gets a person by cpf</p>
+</dd>
+<dt>checkAccountNameExists(accountName: str)</dt><dd><p>Checks if an account name exists</p>
+</dd>
+<dt>checkPersonCpfExists(cpf: str)</dt><dd><p>Checks if a person cpf exists</p>
+</dd>
+<dt>saveEntity(entity: Base)</dt><dd><p>Saves an entity</p>
+</dd>
+<dt>saveLog(log: LogModel)</dt><dd><p>Saves a log</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.accountByCPF">
+<span class="sig-name descname"><span class="pre">accountByCPF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cpf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="src.models.html#src.models.account_model.AccountModel" title="src.models.account_model.AccountModel"><span class="pre">AccountModel</span></a></span></span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController.accountByCPF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController.accountByCPF" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.accountById">
+<span class="sig-name descname"><span class="pre">accountById</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accountId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController.accountById"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController.accountById" title="Permalink to this definition"></a></dt>
+<dd><p>Gets an account by its id</p>
+<section id="parameters">
+<h4>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>accountId<span class="classifier">str</span></dt><dd><p>the id of the account</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h4>Returns<a class="headerlink" href="#returns" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>AccountModel</dt><dd><p>the account</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.accountByName">
+<span class="sig-name descname"><span class="pre">accountByName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accountName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController.accountByName"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController.accountByName" title="Permalink to this definition"></a></dt>
+<dd><p>Gets an account by its name</p>
+<section id="id1">
+<h4>Parameters<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>accountName<span class="classifier">str</span></dt><dd><p>the name of the account</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h4>Returns<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>AccountModel</dt><dd><p>the account</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.accountByPersonId">
+<span class="sig-name descname"><span class="pre">accountByPersonId</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">personId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController.accountByPersonId"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController.accountByPersonId" title="Permalink to this definition"></a></dt>
+<dd><p>Gets an account by its person id</p>
+<section id="id3">
+<h4>Parameters<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>personId<span class="classifier">int</span></dt><dd><p>the id of the person</p>
+</dd>
+</dl>
+</section>
+<section id="id4">
+<h4>Returns<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>AccountModel</dt><dd><p>the account</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.accountLogs">
+<span class="sig-name descname"><span class="pre">accountLogs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">account</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="src.models.html#src.models.account_model.AccountModel" title="src.models.account_model.AccountModel"><span class="pre">AccountModel</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="src.models.html#src.models.log_model.LogModel" title="src.models.log_model.LogModel"><span class="pre">src.models.log_model.LogModel</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController.accountLogs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController.accountLogs" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the logs of an account</p>
+<section id="id5">
+<h4>Parameters<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>account<span class="classifier">AccountModel</span></dt><dd><p>the account</p>
+</dd>
+</dl>
+</section>
+<section id="id6">
+<h4>Returns<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>list[LogModel] </dt><dd><p>the logs of the account</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.accountsByStringInName">
+<span class="sig-name descname"><span class="pre">accountsByStringInName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="src.models.html#src.models.account_model.AccountModel" title="src.models.account_model.AccountModel"><span class="pre">src.models.account_model.AccountModel</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController.accountsByStringInName"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController.accountsByStringInName" title="Permalink to this definition"></a></dt>
+<dd><p>Gets a list of accounts that have a string in their name</p>
+<section id="id7">
+<h4>Parameters<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>string<span class="classifier">str</span></dt><dd><p>the string to search for</p>
+</dd>
+</dl>
+</section>
+<section id="id8">
+<h4>Returns<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>list[AccountModel]</dt><dd><p>the list of accountsf</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.addLog">
+<span class="sig-name descname"><span class="pre">addLog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">account</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="src.models.html#src.models.account_model.AccountModel" title="src.models.account_model.AccountModel"><span class="pre">AccountModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logType</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController.addLog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController.addLog" title="Permalink to this definition"></a></dt>
+<dd><p>Adds a log to an account</p>
+<section id="id9">
+<h4>Parameters<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>account<span class="classifier">AccountModel</span></dt><dd><p>the account</p>
+</dd>
+<dt>message<span class="classifier">str</span></dt><dd><p>the message</p>
+</dd>
+<dt>logType<span class="classifier">str</span></dt><dd><p>the log type</p>
+</dd>
+</dl>
+</section>
+<section id="id10">
+<h4>Returns<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h4>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.checkAccountNameExists">
+<span class="sig-name descname"><span class="pre">checkAccountNameExists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accountName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController.checkAccountNameExists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController.checkAccountNameExists" title="Permalink to this definition"></a></dt>
+<dd><p>Checks if an account name exists</p>
+<section id="id11">
+<h4>Parameters<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>accountName<span class="classifier">str</span></dt><dd><p>the name of the account</p>
+</dd>
+</dl>
+</section>
+<section id="id12">
+<h4>Returns<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>bool</dt><dd><p>if the account name exists</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.checkAccountNameExistsByPersonId">
+<span class="sig-name descname"><span class="pre">checkAccountNameExistsByPersonId</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accountName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController.checkAccountNameExistsByPersonId"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController.checkAccountNameExistsByPersonId" title="Permalink to this definition"></a></dt>
+<dd><p>Checks if an account name exists</p>
+<section id="id13">
+<h4>Parameters<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>accountName<span class="classifier">str</span></dt><dd><p>the name of the account</p>
+</dd>
+</dl>
+</section>
+<section id="id14">
+<h4>Returns<a class="headerlink" href="#id14" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>bool</dt><dd><p>if the account name exists</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.createAccount">
+<span class="sig-name descname"><span class="pre">createAccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">personFirstName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">personLastName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">age</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accountName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accountPassword</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accountBalance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accountLimit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController.createAccount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController.createAccount" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a new account</p>
+<section id="id15">
+<h4>Parameters<a class="headerlink" href="#id15" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>personFirstName<span class="classifier">str</span></dt><dd><p>the first name of the person</p>
+</dd>
+<dt>personLastName<span class="classifier">str</span></dt><dd><p>the last name of the person</p>
+</dd>
+<dt>age<span class="classifier">int</span></dt><dd><p>the age of the person</p>
+</dd>
+<dt>cpf<span class="classifier">str</span></dt><dd><p>the cpf of the person</p>
+</dd>
+<dt>accountName<span class="classifier">str</span></dt><dd><p>the name of the account</p>
+</dd>
+<dt>accountPassword<span class="classifier">str</span></dt><dd><p>the password of the account</p>
+</dd>
+<dt>accountBalance<span class="classifier">float</span></dt><dd><p>the balance of the account</p>
+</dd>
+<dt>accountLimit<span class="classifier">float</span></dt><dd><p>the limit of the account</p>
+</dd>
+<dt>commit<span class="classifier">bool, optional</span></dt><dd><p>if the account should be commited, by default False</p>
+</dd>
+</dl>
+</section>
+<section id="id16">
+<h4>Returns<a class="headerlink" href="#id16" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>AccountModel</dt><dd><p>the new account</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.createPerson">
+<span class="sig-name descname"><span class="pre">createPerson</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">firstName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lastName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">age</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController.createPerson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController.createPerson" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a new person</p>
+<section id="id17">
+<h4>Parameters<a class="headerlink" href="#id17" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>firstName<span class="classifier">str</span></dt><dd><p>the first name of the person</p>
+</dd>
+<dt>lastName<span class="classifier">str</span></dt><dd><p>the last name of the person</p>
+</dd>
+<dt>age<span class="classifier">int</span></dt><dd><p>the age of the person</p>
+</dd>
+<dt>cpf<span class="classifier">str</span></dt><dd><p>the cpf of the person</p>
+</dd>
+<dt>commit<span class="classifier">bool, optional</span></dt><dd><p>if the person should be commited, by default False</p>
+</dd>
+</dl>
+</section>
+<section id="id18">
+<h4>Returns<a class="headerlink" href="#id18" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>PersonModel</dt><dd><p>the new person</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.deleteEntity">
+<span class="sig-name descname"><span class="pre">deleteEntity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController.deleteEntity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController.deleteEntity" title="Permalink to this definition"></a></dt>
+<dd><p>Deletes an entity</p>
+<section id="id19">
+<h4>Parameters<a class="headerlink" href="#id19" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>entity<span class="classifier">Base</span></dt><dd><p>the entity to delete</p>
+</dd>
+</dl>
+</section>
+<section id="id20">
+<h4>Returns<a class="headerlink" href="#id20" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>bool</dt><dd><p>if the entity was deleted</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.deposit">
+<span class="sig-name descname"><span class="pre">deposit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">account</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="src.models.html#src.models.account_model.AccountModel" title="src.models.account_model.AccountModel"><span class="pre">AccountModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController.deposit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController.deposit" title="Permalink to this definition"></a></dt>
+<dd><p>Deposits money into an account</p>
+<section id="id21">
+<h4>Parameters<a class="headerlink" href="#id21" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>account<span class="classifier">AccountModel</span></dt><dd><p>the account</p>
+</dd>
+<dt>value<span class="classifier">float</span></dt><dd><p>the value to deposit</p>
+</dd>
+</dl>
+</section>
+<section id="id22">
+<h4>Returns<a class="headerlink" href="#id22" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>bool</dt><dd><p>if the deposit was successful</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.dispose">
+<span class="sig-name descname"><span class="pre">dispose</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController.dispose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController.dispose" title="Permalink to this definition"></a></dt>
+<dd><p>Disposes the BankController</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.factoryWithEngine">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">factoryWithEngine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Engine</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController.factoryWithEngine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController.factoryWithEngine" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a new BankController with a name, agency and engine</p>
+<section id="id23">
+<h4>Parameters<a class="headerlink" href="#id23" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>name<span class="classifier">str</span></dt><dd><p>the name of the bank</p>
+</dd>
+<dt>agency<span class="classifier">str</span></dt><dd><p>the agency of the bank</p>
+</dd>
+<dt>engine<span class="classifier">sa.engine.Engine</span></dt><dd><p>the engine of the bank</p>
+</dd>
+</dl>
+</section>
+<section id="id24">
+<h4>Returns<a class="headerlink" href="#id24" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>BankController</dt><dd><p>the new BankController</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.factoryWithNameAndAgency">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">factoryWithNameAndAgency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController.factoryWithNameAndAgency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController.factoryWithNameAndAgency" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a new BankController with a name and agency</p>
+<section id="id25">
+<h4>Parameters<a class="headerlink" href="#id25" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>name<span class="classifier">str</span></dt><dd><p>the name of the bank</p>
+</dd>
+<dt>agency<span class="classifier">str</span></dt><dd><p>the agency of the bank</p>
+</dd>
+</dl>
+</section>
+<section id="id26">
+<h4>Returns<a class="headerlink" href="#id26" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>BankController</dt><dd><p>the new BankController</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.isLogged">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">isLogged</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#src.controllers.bank_controller.BankController.isLogged" title="Permalink to this definition"></a></dt>
+<dd><p>Checks if the user is logged</p>
+<section id="id27">
+<h4>Returns<a class="headerlink" href="#id27" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>bool</dt><dd><p>if the user is logged</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.loggedAccount">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">loggedAccount</span></span><a class="headerlink" href="#src.controllers.bank_controller.BankController.loggedAccount" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the logged account</p>
+<section id="id28">
+<h4>Returns<a class="headerlink" href="#id28" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>AccountModel | None</dt><dd><p>the logged account</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.loggedAccountLogs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">loggedAccountLogs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="src.models.html#src.models.log_model.LogModel" title="src.models.log_model.LogModel"><span class="pre">src.models.log_model.LogModel</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#src.controllers.bank_controller.BankController.loggedAccountLogs" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the logs of the logged account</p>
+<section id="id29">
+<h4>Returns<a class="headerlink" href="#id29" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>list[LogModel]</dt><dd><p>the logs of the logged account</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.loggedPerson">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">loggedPerson</span></span><a class="headerlink" href="#src.controllers.bank_controller.BankController.loggedPerson" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the logged person</p>
+<section id="id30">
+<h4>Returns<a class="headerlink" href="#id30" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>PersonModel | None</dt><dd><p>the logged person</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.login">
+<span class="sig-name descname"><span class="pre">login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accountName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accountPassword</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController.login"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController.login" title="Permalink to this definition"></a></dt>
+<dd><p>Logs in an account</p>
+<section id="id31">
+<h4>Parameters<a class="headerlink" href="#id31" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>accountName<span class="classifier">str</span></dt><dd><p>the name of the account</p>
+</dd>
+<dt>accountPassword<span class="classifier">str</span></dt><dd><p>the password of the account</p>
+</dd>
+</dl>
+</section>
+<section id="id32">
+<h4>Returns<a class="headerlink" href="#id32" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>bool</dt><dd><p>if the login was successful</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.personByCpf">
+<span class="sig-name descname"><span class="pre">personByCpf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cpf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController.personByCpf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController.personByCpf" title="Permalink to this definition"></a></dt>
+<dd><p>Gets a person by its cpf</p>
+<section id="id33">
+<h4>Parameters<a class="headerlink" href="#id33" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>cpf<span class="classifier">str</span></dt><dd><p>the cpf of the person</p>
+</dd>
+</dl>
+</section>
+<section id="id34">
+<h4>Returns<a class="headerlink" href="#id34" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>PersonModel</dt><dd><p>the person</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.refreshLoggedAccount">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">refreshLoggedAccount</span></span><a class="headerlink" href="#src.controllers.bank_controller.BankController.refreshLoggedAccount" title="Permalink to this definition"></a></dt>
+<dd><p>Refreshes the logged account</p>
+<section id="id35">
+<h4>Returns<a class="headerlink" href="#id35" title="Permalink to this heading"></a></h4>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.saveEntity">
+<span class="sig-name descname"><span class="pre">saveEntity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController.saveEntity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController.saveEntity" title="Permalink to this definition"></a></dt>
+<dd><p>Saves an entity</p>
+<section id="id36">
+<h4>Parameters<a class="headerlink" href="#id36" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>entity<span class="classifier">Base</span></dt><dd><p>the entity to save</p>
+</dd>
+</dl>
+</section>
+<section id="id37">
+<h4>Returns<a class="headerlink" href="#id37" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>bool</dt><dd><p>if the entity was saved</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.transfer">
+<span class="sig-name descname"><span class="pre">transfer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accountFrom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="src.models.html#src.models.account_model.AccountModel" title="src.models.account_model.AccountModel"><span class="pre">AccountModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">accountTo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="src.models.html#src.models.account_model.AccountModel" title="src.models.account_model.AccountModel"><span class="pre">AccountModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController.transfer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController.transfer" title="Permalink to this definition"></a></dt>
+<dd><p>Transfers money from one account to another</p>
+<section id="id38">
+<h4>Parameters<a class="headerlink" href="#id38" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>accountFrom<span class="classifier">AccountModel</span></dt><dd><p>the account to transfer from</p>
+</dd>
+<dt>accountTo<span class="classifier">AccountModel</span></dt><dd><p>the account to transfer to</p>
+</dd>
+<dt>value<span class="classifier">float</span></dt><dd><p>the value to transfer</p>
+</dd>
+</dl>
+</section>
+<section id="id39">
+<h4>Returns<a class="headerlink" href="#id39" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>bool</dt><dd><p>if the transfer was successful</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.transferByAccountName">
+<span class="sig-name descname"><span class="pre">transferByAccountName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accountFrom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="src.models.html#src.models.account_model.AccountModel" title="src.models.account_model.AccountModel"><span class="pre">AccountModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">accountToName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController.transferByAccountName"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController.transferByAccountName" title="Permalink to this definition"></a></dt>
+<dd><p>Transfers money from one account to another</p>
+<section id="id40">
+<h4>Parameters<a class="headerlink" href="#id40" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>accountFrom<span class="classifier">AccountModel</span></dt><dd><p>the account to transfer from</p>
+</dd>
+<dt>accountToName<span class="classifier">str</span></dt><dd><p>the name of the account to transfer to</p>
+</dd>
+<dt>value<span class="classifier">float</span></dt><dd><p>the value to transfer</p>
+</dd>
+</dl>
+</section>
+<section id="id41">
+<h4>Returns<a class="headerlink" href="#id41" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>bool</dt><dd><p>if the transfer was successful</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.updateEntity">
+<span class="sig-name descname"><span class="pre">updateEntity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController.updateEntity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController.updateEntity" title="Permalink to this definition"></a></dt>
+<dd><p>Updates an entity</p>
+<section id="id42">
+<h4>Parameters<a class="headerlink" href="#id42" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>entity<span class="classifier">Base</span></dt><dd><p>the entity to update</p>
+</dd>
+</dl>
+</section>
+<section id="id43">
+<h4>Returns<a class="headerlink" href="#id43" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>bool</dt><dd><p>if the entity was updated</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.bank_controller.BankController.withdraw">
+<span class="sig-name descname"><span class="pre">withdraw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">account</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="src.models.html#src.models.account_model.AccountModel" title="src.models.account_model.AccountModel"><span class="pre">AccountModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/src/controllers/bank_controller.html#BankController.withdraw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.bank_controller.BankController.withdraw" title="Permalink to this definition"></a></dt>
+<dd><p>Withdraws money from an account</p>
+<section id="id44">
+<h4>Parameters<a class="headerlink" href="#id44" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>account<span class="classifier">AccountModel</span></dt><dd><p>the account</p>
+</dd>
+<dt>value<span class="classifier">float</span></dt><dd><p>the value to withdraw</p>
+</dd>
+</dl>
+</section>
+<section id="id45">
+<h4>Returns<a class="headerlink" href="#id45" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>bool</dt><dd><p>if the withdraw was successful</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+<section id="module-src.controllers.client_back_controller">
+<span id="src-controllers-client-back-controller-module"></span><h2>src.controllers.client_back_controller module<a class="headerlink" href="#module-src.controllers.client_back_controller" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.controllers.client_back_controller.ClientBackController">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.controllers.client_back_controller.</span></span><span class="sig-name descname"><span class="pre">ClientBackController</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bankName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bankAgency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/controllers/client_back_controller.html#ClientBackController"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.client_back_controller.ClientBackController" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Client back controller</p>
+<p>…</p>
+<section id="id46">
+<h3>Parameters<a class="headerlink" href="#id46" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>client<span class="classifier">socket.socket</span></dt><dd><p>Client socket</p>
+</dd>
+<dt>address<span class="classifier">tuple</span></dt><dd><p>Client address</p>
+</dd>
+<dt>bankName<span class="classifier">str</span></dt><dd><p>Bank name</p>
+</dd>
+<dt>bankAgency<span class="classifier">str</span></dt><dd><p>Bank agency</p>
+</dd>
+<dt>engine<span class="classifier">sqlalchemy.engine.Engine</span></dt><dd><p>Database engine</p>
+</dd>
+</dl>
+</section>
+<section id="id47">
+<h3>Methods<a class="headerlink" href="#id47" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>start(lock: threading.Lock)</dt><dd><p>Start the client back controller</p>
+</dd>
+<dt>send(data: dict)</dt><dd><p>Send data to the client</p>
+</dd>
+<dt>receive() -&gt; dict</dt><dd><p>Receive data from the client</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.client_back_controller.ClientBackController.receive">
+<span class="sig-name descname"><span class="pre">receive</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/src/controllers/client_back_controller.html#ClientBackController.receive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.client_back_controller.ClientBackController.receive" title="Permalink to this definition"></a></dt>
+<dd><p>Receive data from the client</p>
+<section id="id48">
+<h4>Returns<a class="headerlink" href="#id48" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>dict[str, str]</dt><dd><p>Data received</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.client_back_controller.ClientBackController.send">
+<span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/controllers/client_back_controller.html#ClientBackController.send"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.client_back_controller.ClientBackController.send" title="Permalink to this definition"></a></dt>
+<dd><p>Send data to the client</p>
+<section id="id49">
+<h4>Parameters<a class="headerlink" href="#id49" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>data<span class="classifier">dict</span></dt><dd><p>Data to send</p>
+</dd>
+</dl>
+</section>
+<section id="id50">
+<h4>Returns<a class="headerlink" href="#id50" title="Permalink to this heading"></a></h4>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.client_back_controller.ClientBackController.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lock</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">allocate_lock</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/controllers/client_back_controller.html#ClientBackController.start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.client_back_controller.ClientBackController.start" title="Permalink to this definition"></a></dt>
+<dd><p>Start the client back controller</p>
+<section id="id51">
+<h4>Parameters<a class="headerlink" href="#id51" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>lock<span class="classifier">threading.Lock</span></dt><dd><p>Lock to avoid database access at the same time</p>
+</dd>
+</dl>
+</section>
+<section id="id52">
+<h4>Returns<a class="headerlink" href="#id52" title="Permalink to this heading"></a></h4>
+<p>None</p>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+<section id="module-src.controllers.service_controller">
+<span id="src-controllers-service-controller-module"></span><h2>src.controllers.service_controller module<a class="headerlink" href="#module-src.controllers.service_controller" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.controllers.service_controller.ServiceController">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.controllers.service_controller.</span></span><span class="sig-name descname"><span class="pre">ServiceController</span></span><a class="reference internal" href="../_modules/src/controllers/service_controller.html#ServiceController"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.service_controller.ServiceController" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Service controller</p>
+<p>…</p>
+<section id="id53">
+<h3>Parameters<a class="headerlink" href="#id53" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>bankName<span class="classifier">str</span></dt><dd><p>Bank name</p>
+</dd>
+<dt>bankAgency<span class="classifier">str</span></dt><dd><p>Bank agency</p>
+</dd>
+</dl>
+</section>
+<section id="id54">
+<h3>Methods<a class="headerlink" href="#id54" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>start()</dt><dd><p>Start the service</p>
+</dd>
+<dt>stop()</dt><dd><p>Stop the service</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.service_controller.ServiceController.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/controllers/service_controller.html#ServiceController.start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.service_controller.ServiceController.start" title="Permalink to this definition"></a></dt>
+<dd><p>Start the service</p>
+<section id="id55">
+<h4>Returns<a class="headerlink" href="#id55" title="Permalink to this heading"></a></h4>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.controllers.service_controller.ServiceController.stop">
+<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/controllers/service_controller.html#ServiceController.stop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.controllers.service_controller.ServiceController.stop" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+<section id="module-src.controllers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.controllers" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="src.commands.html" class="btn btn-neutral float-left" title="src.commands package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="src.entities.html" class="btn btn-neutral float-right" title="src.entities package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Adriano R. de Sousa.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

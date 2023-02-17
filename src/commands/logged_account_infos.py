@@ -1,12 +1,11 @@
-from ..controllers.bank_controller import BankController
 
-
-def loggedAccountInfos(data: dict, bank: BankController):
+def loggedAccountInfos(data: dict, bank):
     """
     Get logged account infos
 
     Parameters:
         data (dict): Data from the request
+
         bank (BankController): Bank controller
 
     Returns:

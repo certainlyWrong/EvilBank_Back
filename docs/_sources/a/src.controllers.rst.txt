@@ -1,0 +1,37 @@
+src.controllers package
+=======================
+
+Submodules
+----------
+
+src.controllers.bank\_controller module
+---------------------------------------
+
+.. automodule:: src.controllers.bank_controller
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.controllers.client\_back\_controller module
+-----------------------------------------------
+
+.. automodule:: src.controllers.client_back_controller
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.controllers.service\_controller module
+------------------------------------------
+
+.. automodule:: src.controllers.service_controller
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: src.controllers
+   :members:
+   :undoc-members:
+   :show-inheritance:

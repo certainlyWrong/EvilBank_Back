@@ -1,0 +1,69 @@
+src.commands package
+====================
+
+Submodules
+----------
+
+src.commands.deposit module
+---------------------------
+
+.. automodule:: src.commands.deposit
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.commands.logged\_account\_infos module
+------------------------------------------
+
+.. automodule:: src.commands.logged_account_infos
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.commands.login module
+-------------------------
+
+.. automodule:: src.commands.login
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.commands.register module
+----------------------------
+
+.. automodule:: src.commands.register
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.commands.search\_accounts module
+------------------------------------
+
+.. automodule:: src.commands.search_accounts
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.commands.transfer module
+----------------------------
+
+.. automodule:: src.commands.transfer
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.commands.withdraw module
+----------------------------
+
+.. automodule:: src.commands.withdraw
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: src.commands
+   :members:
+   :undoc-members:
+   :show-inheritance:

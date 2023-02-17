@@ -1,0 +1,37 @@
+src.entities package
+====================
+
+Submodules
+----------
+
+src.entities.account\_entity module
+-----------------------------------
+
+.. automodule:: src.entities.account_entity
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.entities.log\_entity module
+-------------------------------
+
+.. automodule:: src.entities.log_entity
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.entities.person\_entity module
+----------------------------------
+
+.. automodule:: src.entities.person_entity
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: src.entities
+   :members:
+   :undoc-members:
+   :show-inheritance:

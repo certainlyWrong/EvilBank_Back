@@ -1,0 +1,37 @@
+src.models package
+==================
+
+Submodules
+----------
+
+src.models.account\_model module
+--------------------------------
+
+.. automodule:: src.models.account_model
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.models.log\_model module
+----------------------------
+
+.. automodule:: src.models.log_model
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.models.person\_model module
+-------------------------------
+
+.. automodule:: src.models.person_model
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: src.models
+   :members:
+   :undoc-members:
+   :show-inheritance:

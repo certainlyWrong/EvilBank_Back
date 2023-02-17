@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.models package &mdash; evilBank  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="src.entities package" href="src.entities.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2a7b9b" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            evilBank
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="src.html">src package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="src.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="src.commands.html">src.commands package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.controllers.html">src.controllers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.entities.html">src.entities package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">src.models package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#module-src">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2a7b9b" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">evilBank</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">src</a></li>
+          <li class="breadcrumb-item"><a href="src.html">src package</a></li>
+      <li class="breadcrumb-item active">src.models package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/a/src.models.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="src-models-package">
+<h1>src.models package<a class="headerlink" href="#src-models-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-src.models.account_model">
+<span id="src-models-account-model-module"></span><h2>src.models.account_model module<a class="headerlink" href="#module-src.models.account_model" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.models.account_model.AccountModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.models.account_model.</span></span><span class="sig-name descname"><span class="pre">AccountModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accountId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">personId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accountName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accountHash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">balance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/models/account_model.html#AccountModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.account_model.AccountModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Account model</p>
+<p>…</p>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>accountId<span class="classifier">str</span></dt><dd><p>Account id</p>
+</dd>
+<dt>personId<span class="classifier">str</span></dt><dd><p>Person id</p>
+</dd>
+<dt>accountName<span class="classifier">str</span></dt><dd><p>Account name</p>
+</dd>
+<dt>accountHash<span class="classifier">str</span></dt><dd><p>Account hash</p>
+</dd>
+<dt>balance<span class="classifier">float</span></dt><dd><p>Account balance</p>
+</dd>
+<dt>limit<span class="classifier">float</span></dt><dd><p>Account limit</p>
+</dd>
+</dl>
+</section>
+<section id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>factoryAccountModel(clientId: str, accountName: str, accountHash: str, balance: float, limit: float) -&gt; AccountModel</dt><dd><p>Factory method to create an account model</p>
+</dd>
+<dt>empty() -&gt; AccountModel</dt><dd><p>Create an empty account model</p>
+</dd>
+<dt>fromEntity(accountEntity: AccountEntity) -&gt; AccountModel</dt><dd><p>Create an account model from an account entity</p>
+</dd>
+<dt>toDict() -&gt; dict</dt><dd><p>Create a dict from the account model</p>
+</dd>
+<dt>toEntity() -&gt; AccountEntity</dt><dd><p>Create an account entity from the account model</p>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="src.models.account_model.AccountModel.accountId">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">accountId</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#src.models.account_model.AccountModel.accountId" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="src.models.account_model.AccountModel.accountName">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">accountName</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#src.models.account_model.AccountModel.accountName" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="src.models.account_model.AccountModel.balance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">balance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#src.models.account_model.AccountModel.balance" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.account_model.AccountModel.empty">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">empty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#src.models.account_model.AccountModel" title="src.models.account_model.AccountModel"><span class="pre">AccountModel</span></a></span></span><a class="reference internal" href="../_modules/src/models/account_model.html#AccountModel.empty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.account_model.AccountModel.empty" title="Permalink to this definition"></a></dt>
+<dd><p>Create an empty account model</p>
+<section id="returns">
+<h4>Returns<a class="headerlink" href="#returns" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>AccountModel</dt><dd><p>Account model</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.account_model.AccountModel.factoryAccountModel">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">factoryAccountModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clientId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accountName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accountHash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">balance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/models/account_model.html#AccountModel.factoryAccountModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.account_model.AccountModel.factoryAccountModel" title="Permalink to this definition"></a></dt>
+<dd><p>Factory method to create an account model</p>
+<section id="id1">
+<h4>Parameters<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>clientId<span class="classifier">str</span></dt><dd><p>Client id</p>
+</dd>
+<dt>accountName<span class="classifier">str</span></dt><dd><p>Account name</p>
+</dd>
+<dt>accountHash<span class="classifier">str</span></dt><dd><p>Account hash</p>
+</dd>
+<dt>balance<span class="classifier">float</span></dt><dd><p>Account balance</p>
+</dd>
+<dt>limit<span class="classifier">float</span></dt><dd><p>Account limit</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h4>Returns<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>AccountModel</dt><dd><p>Account model</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.account_model.AccountModel.fromDict">
+<span class="sig-name descname"><span class="pre">fromDict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/models/account_model.html#AccountModel.fromDict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.account_model.AccountModel.fromDict" title="Permalink to this definition"></a></dt>
+<dd><p>Create an account model from a dict</p>
+<section id="id3">
+<h4>Parameters<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>data<span class="classifier">dict</span></dt><dd><p>Data to create the account model</p>
+</dd>
+</dl>
+</section>
+<section id="id4">
+<h4>Returns<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>AccountModel</dt><dd><p>Account model</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.account_model.AccountModel.fromEntity">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fromEntity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accountEntity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="src.entities.html#src.entities.account_entity.AccountEntity" title="src.entities.account_entity.AccountEntity"><span class="pre">AccountEntity</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#src.models.account_model.AccountModel" title="src.models.account_model.AccountModel"><span class="pre">AccountModel</span></a></span></span><a class="reference internal" href="../_modules/src/models/account_model.html#AccountModel.fromEntity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.account_model.AccountModel.fromEntity" title="Permalink to this definition"></a></dt>
+<dd><p>Create an account model from an account entity</p>
+<section id="id5">
+<h4>Parameters<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>accountEntity<span class="classifier">AccountEntity</span></dt><dd><p>Account entity</p>
+</dd>
+</dl>
+</section>
+<section id="id6">
+<h4>Returns<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>AccountModel</dt><dd><p>Account model</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.account_model.AccountModel.fromJson">
+<span class="sig-name descname"><span class="pre">fromJson</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/models/account_model.html#AccountModel.fromJson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.account_model.AccountModel.fromJson" title="Permalink to this definition"></a></dt>
+<dd><p>Create an account model from a json</p>
+<section id="id7">
+<h4>Parameters<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>data<span class="classifier">str</span></dt><dd><p>Data to create the account model</p>
+</dd>
+</dl>
+</section>
+<section id="id8">
+<h4>Returns<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>AccountModel</dt><dd><p>Account model</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="src.models.account_model.AccountModel.hashAccount">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">hashAccount</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#src.models.account_model.AccountModel.hashAccount" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="src.models.account_model.AccountModel.limit">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">limit</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#src.models.account_model.AccountModel.limit" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="src.models.account_model.AccountModel.personId">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">personId</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#src.models.account_model.AccountModel.personId" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.account_model.AccountModel.toDict">
+<span class="sig-name descname"><span class="pre">toDict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/src/models/account_model.html#AccountModel.toDict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.account_model.AccountModel.toDict" title="Permalink to this definition"></a></dt>
+<dd><p>Create a dict from the account model</p>
+<section id="id9">
+<h4>Returns<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>dict</dt><dd><p>Account model as dict</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.account_model.AccountModel.toEntity">
+<span class="sig-name descname"><span class="pre">toEntity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="src.entities.html#src.entities.account_entity.AccountEntity" title="src.entities.account_entity.AccountEntity"><span class="pre">AccountEntity</span></a></span></span><a class="reference internal" href="../_modules/src/models/account_model.html#AccountModel.toEntity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.account_model.AccountModel.toEntity" title="Permalink to this definition"></a></dt>
+<dd><p>Create an account entity from the account model</p>
+<section id="id10">
+<h4>Returns<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>AccountEntity</dt><dd><p>Account entity</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.account_model.AccountModel.toJson">
+<span class="sig-name descname"><span class="pre">toJson</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/src/models/account_model.html#AccountModel.toJson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.account_model.AccountModel.toJson" title="Permalink to this definition"></a></dt>
+<dd><p>Create a json from the account model</p>
+<section id="id11">
+<h4>Returns<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>str</dt><dd><p>Account model as json</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+<section id="module-src.models.log_model">
+<span id="src-models-log-model-module"></span><h2>src.models.log_model module<a class="headerlink" href="#module-src.models.log_model" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.models.log_model.LogModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.models.log_model.</span></span><span class="sig-name descname"><span class="pre">LogModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acocuntId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logDate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logType</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logMessage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/models/log_model.html#LogModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.log_model.LogModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Log model</p>
+<p>…</p>
+<section id="id12">
+<h3>Parameters<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>logId<span class="classifier">str</span></dt><dd><p>Log id</p>
+</dd>
+<dt>acocuntId<span class="classifier">str</span></dt><dd><p>Account id</p>
+</dd>
+<dt>logDate<span class="classifier">datetime</span></dt><dd><p>Log date</p>
+</dd>
+<dt>logType<span class="classifier">str</span></dt><dd><p>Log type</p>
+</dd>
+<dt>logMessage<span class="classifier">str</span></dt><dd><p>Log message</p>
+</dd>
+</dl>
+</section>
+<section id="id13">
+<h3>Methods<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>factoryLogModel(accountId: str, logType: str, logMessage: str) -&gt; LogModel</dt><dd><p>Factory method to create a log model</p>
+</dd>
+<dt>fromEntity(logEntity: LogEntity) -&gt; LogModel</dt><dd><p>Create a log model from a log entity</p>
+</dd>
+<dt>toDict() -&gt; dict</dt><dd><p>Create a dict from the log model</p>
+</dd>
+<dt>toEntity() -&gt; LogEntity</dt><dd><p>Create a log entity from the log model</p>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="src.models.log_model.LogModel.acocuntId">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">acocuntId</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#src.models.log_model.LogModel.acocuntId" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.log_model.LogModel.factoryLogModel">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">factoryLogModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accountId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logType</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logMessage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/models/log_model.html#LogModel.factoryLogModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.log_model.LogModel.factoryLogModel" title="Permalink to this definition"></a></dt>
+<dd><p>Factory method to create a log model</p>
+<section id="id14">
+<h4>Parameters<a class="headerlink" href="#id14" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>accountId<span class="classifier">str</span></dt><dd><p>Account id</p>
+</dd>
+<dt>logType<span class="classifier">str</span></dt><dd><p>Log type</p>
+</dd>
+<dt>logMessage<span class="classifier">str</span></dt><dd><p>Log message</p>
+</dd>
+</dl>
+</section>
+<section id="id15">
+<h4>Returns<a class="headerlink" href="#id15" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>LogModel</dt><dd><p>Log model</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.log_model.LogModel.fromDict">
+<span class="sig-name descname"><span class="pre">fromDict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/models/log_model.html#LogModel.fromDict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.log_model.LogModel.fromDict" title="Permalink to this definition"></a></dt>
+<dd><p>Create a log model from a dict</p>
+<section id="id16">
+<h4>Parameters<a class="headerlink" href="#id16" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>data<span class="classifier">dict</span></dt><dd><p>Log model dict</p>
+</dd>
+</dl>
+</section>
+<section id="id17">
+<h4>Returns<a class="headerlink" href="#id17" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>LogModel</dt><dd><p>Log model</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.log_model.LogModel.fromEntity">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fromEntity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logEntity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="src.entities.html#src.entities.log_entity.LogEntity" title="src.entities.log_entity.LogEntity"><span class="pre">LogEntity</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#src.models.log_model.LogModel" title="src.models.log_model.LogModel"><span class="pre">LogModel</span></a></span></span><a class="reference internal" href="../_modules/src/models/log_model.html#LogModel.fromEntity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.log_model.LogModel.fromEntity" title="Permalink to this definition"></a></dt>
+<dd><p>Create a log model from a log entity</p>
+<section id="id18">
+<h4>Parameters<a class="headerlink" href="#id18" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>logEntity<span class="classifier">LogEntity</span></dt><dd><p>Log entity</p>
+</dd>
+</dl>
+</section>
+<section id="id19">
+<h4>Returns<a class="headerlink" href="#id19" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>LogModel</dt><dd><p>Log model</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.log_model.LogModel.fromJson">
+<span class="sig-name descname"><span class="pre">fromJson</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/models/log_model.html#LogModel.fromJson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.log_model.LogModel.fromJson" title="Permalink to this definition"></a></dt>
+<dd><p>Create a log model from a json</p>
+<section id="id20">
+<h4>Parameters<a class="headerlink" href="#id20" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>data<span class="classifier">str</span></dt><dd><p>Log model json</p>
+</dd>
+</dl>
+</section>
+<section id="id21">
+<h4>Returns<a class="headerlink" href="#id21" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>LogModel</dt><dd><p>Log model</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="src.models.log_model.LogModel.logDate">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">logDate</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span></em><a class="headerlink" href="#src.models.log_model.LogModel.logDate" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="src.models.log_model.LogModel.logId">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">logId</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#src.models.log_model.LogModel.logId" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="src.models.log_model.LogModel.logMessage">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">logMessage</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#src.models.log_model.LogModel.logMessage" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="src.models.log_model.LogModel.logType">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">logType</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#src.models.log_model.LogModel.logType" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.log_model.LogModel.toDict">
+<span class="sig-name descname"><span class="pre">toDict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/src/models/log_model.html#LogModel.toDict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.log_model.LogModel.toDict" title="Permalink to this definition"></a></dt>
+<dd><p>Create a dict from the log model</p>
+<section id="id22">
+<h4>Returns<a class="headerlink" href="#id22" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>dict</dt><dd><p>Log model dict</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.log_model.LogModel.toEntity">
+<span class="sig-name descname"><span class="pre">toEntity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="src.entities.html#src.entities.log_entity.LogEntity" title="src.entities.log_entity.LogEntity"><span class="pre">LogEntity</span></a></span></span><a class="reference internal" href="../_modules/src/models/log_model.html#LogModel.toEntity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.log_model.LogModel.toEntity" title="Permalink to this definition"></a></dt>
+<dd><p>Create a log entity from the log model</p>
+<section id="id23">
+<h4>Returns<a class="headerlink" href="#id23" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>LogEntity</dt><dd><p>Log entity</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.log_model.LogModel.toJson">
+<span class="sig-name descname"><span class="pre">toJson</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/src/models/log_model.html#LogModel.toJson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.log_model.LogModel.toJson" title="Permalink to this definition"></a></dt>
+<dd><p>Create a json from the log model</p>
+<section id="id24">
+<h4>Returns<a class="headerlink" href="#id24" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>str</dt><dd><p>Log model json</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+<section id="module-src.models.person_model">
+<span id="src-models-person-model-module"></span><h2>src.models.person_model module<a class="headerlink" href="#module-src.models.person_model" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.models.person_model.PersonModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.models.person_model.</span></span><span class="sig-name descname"><span class="pre">PersonModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">personId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">firstName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lastName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">age</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/models/person_model.html#PersonModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.person_model.PersonModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Person model</p>
+<p>…</p>
+<section id="id25">
+<h3>Parameters<a class="headerlink" href="#id25" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>personId<span class="classifier">str</span></dt><dd><p>Person id</p>
+</dd>
+<dt>firstName<span class="classifier">str</span></dt><dd><p>Person first name</p>
+</dd>
+<dt>lastName<span class="classifier">str</span></dt><dd><p>Person last name</p>
+</dd>
+<dt>age<span class="classifier">int</span></dt><dd><p>Person age</p>
+</dd>
+<dt>cpf<span class="classifier">str</span></dt><dd><p>Person cpf</p>
+</dd>
+</dl>
+</section>
+<section id="id26">
+<h3>Methods<a class="headerlink" href="#id26" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>factoryPersonModel(firstName: str, lastName: str, age: int, cpf: str) -&gt; PersonModel</dt><dd><p>Factory method to create a person model</p>
+</dd>
+<dt>fromEntity(personEntity: PersonEntity) -&gt; PersonModel</dt><dd><p>Create a person model from a person entity</p>
+</dd>
+<dt>toDict() -&gt; dict</dt><dd><p>Create a dict from the person model</p>
+</dd>
+<dt>toEntity() -&gt; PersonEntity</dt><dd><p>Create a person entity from the person model</p>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="src.models.person_model.PersonModel.age">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">age</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#src.models.person_model.PersonModel.age" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="src.models.person_model.PersonModel.cpf">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cpf</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#src.models.person_model.PersonModel.cpf" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.person_model.PersonModel.empty">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">empty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#src.models.person_model.PersonModel" title="src.models.person_model.PersonModel"><span class="pre">PersonModel</span></a></span></span><a class="reference internal" href="../_modules/src/models/person_model.html#PersonModel.empty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.person_model.PersonModel.empty" title="Permalink to this definition"></a></dt>
+<dd><p>Create an empty person model</p>
+<section id="id27">
+<h4>Returns<a class="headerlink" href="#id27" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>PersonModel</dt><dd><p>Person model</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.person_model.PersonModel.factoryPersonModel">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">factoryPersonModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">firstName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lastName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">age</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/models/person_model.html#PersonModel.factoryPersonModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.person_model.PersonModel.factoryPersonModel" title="Permalink to this definition"></a></dt>
+<dd><p>Factory method to create a person model</p>
+<section id="id28">
+<h4>Parameters<a class="headerlink" href="#id28" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>firstName<span class="classifier">str</span></dt><dd><p>Person first name</p>
+</dd>
+<dt>lastName<span class="classifier">str</span></dt><dd><p>Person last name</p>
+</dd>
+<dt>age<span class="classifier">int</span></dt><dd><p>Person age</p>
+</dd>
+<dt>cpf<span class="classifier">str</span></dt><dd><p>Person cpf</p>
+</dd>
+</dl>
+</section>
+<section id="id29">
+<h4>Returns<a class="headerlink" href="#id29" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>PersonModel</dt><dd><p>Person model</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="src.models.person_model.PersonModel.firstName">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">firstName</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#src.models.person_model.PersonModel.firstName" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.person_model.PersonModel.fromDict">
+<span class="sig-name descname"><span class="pre">fromDict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">personDict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/models/person_model.html#PersonModel.fromDict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.person_model.PersonModel.fromDict" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.person_model.PersonModel.fromEntity">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fromEntity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">personEntity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="src.entities.html#src.entities.person_entity.PersonEntity" title="src.entities.person_entity.PersonEntity"><span class="pre">PersonEntity</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#src.models.person_model.PersonModel" title="src.models.person_model.PersonModel"><span class="pre">PersonModel</span></a></span></span><a class="reference internal" href="../_modules/src/models/person_model.html#PersonModel.fromEntity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.person_model.PersonModel.fromEntity" title="Permalink to this definition"></a></dt>
+<dd><p>Create a person model from a person entity</p>
+<section id="id30">
+<h4>Parameters<a class="headerlink" href="#id30" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>personEntity<span class="classifier">PersonEntity</span></dt><dd><p>Person entity</p>
+</dd>
+</dl>
+</section>
+<section id="id31">
+<h4>Returns<a class="headerlink" href="#id31" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>PersonModel</dt><dd><p>Person model</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.person_model.PersonModel.fromJson">
+<span class="sig-name descname"><span class="pre">fromJson</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">personJson</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/models/person_model.html#PersonModel.fromJson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.person_model.PersonModel.fromJson" title="Permalink to this definition"></a></dt>
+<dd><p>Create a person model from a json</p>
+<section id="id32">
+<h4>Parameters<a class="headerlink" href="#id32" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>personJson<span class="classifier">str</span></dt><dd><p>Person json</p>
+</dd>
+</dl>
+</section>
+<section id="id33">
+<h4>Returns<a class="headerlink" href="#id33" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>PersonModel</dt><dd><p>Person model</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="src.models.person_model.PersonModel.lastName">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lastName</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#src.models.person_model.PersonModel.lastName" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="src.models.person_model.PersonModel.personId">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">personId</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#src.models.person_model.PersonModel.personId" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.person_model.PersonModel.toDict">
+<span class="sig-name descname"><span class="pre">toDict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/src/models/person_model.html#PersonModel.toDict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.person_model.PersonModel.toDict" title="Permalink to this definition"></a></dt>
+<dd><p>Create a dict from the person model</p>
+<section id="id34">
+<h4>Returns<a class="headerlink" href="#id34" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>dict</dt><dd><p>Person model dict</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.person_model.PersonModel.toEntity">
+<span class="sig-name descname"><span class="pre">toEntity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="src.entities.html#src.entities.person_entity.PersonEntity" title="src.entities.person_entity.PersonEntity"><span class="pre">PersonEntity</span></a></span></span><a class="reference internal" href="../_modules/src/models/person_model.html#PersonModel.toEntity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.person_model.PersonModel.toEntity" title="Permalink to this definition"></a></dt>
+<dd><p>Create a person entity from the person model</p>
+<section id="id35">
+<h4>Returns<a class="headerlink" href="#id35" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>PersonEntity</dt><dd><p>Person entity</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.person_model.PersonModel.toJson">
+<span class="sig-name descname"><span class="pre">toJson</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/src/models/person_model.html#PersonModel.toJson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.person_model.PersonModel.toJson" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+<section id="module-src.models">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.models" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="src.entities.html" class="btn btn-neutral float-left" title="src.entities package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Adriano R. de Sousa.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

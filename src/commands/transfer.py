@@ -1,12 +1,11 @@
-from ..controllers.bank_controller import BankController
 
-
-def transfer(data, bank: BankController):
+def transfer(data, bank):
     """
     Transfer money to another account
 
     Parameters:
         data (dict): Data from the request
+
         bank (BankController): Bank controller
 
     Returns:

@@ -2,14 +2,14 @@ import json
 import socket
 from threading import Lock
 
-from ..commands.login import login
-from ..commands.deposit import deposit
-from ..commands.register import register
-from ..commands.withdraw import withdraw
-from ..commands.transfer import transfer
-from ..commands.logged_account_infos import loggedAccountInfos
-from ..commands.search_accounts import searchAccounts
-from .bank_controller import BankController
+# from ..commands.login import login
+# from ..commands.deposit import deposit
+# from ..commands.register import register
+# from ..commands.withdraw import withdraw
+# from ..commands.transfer import transfer
+# from ..commands.logged_account_infos import loggedAccountInfos
+# from ..commands.search_accounts import searchAccounts
+# from .bank_controller import BankController
 
 
 class ClientBackController:

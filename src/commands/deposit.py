@@ -1,13 +1,11 @@
 
-from ..controllers.bank_controller import BankController
-
-
-def deposit(data, bank: BankController):
+def deposit(data, bank):
     """
     Deposit money to the bank account
 
     Parameters:
         data (dict): Data from the request
+
         bank (BankController): Bank controller
 
     Returns:

@@ -1,12 +1,11 @@
-from ..controllers.bank_controller import BankController
 
-
-def withdraw(data, bank: BankController):
+def withdraw(data, bank):
     """
     Withdraw money from the bank account
 
     Parameters:
         data (dict): Data from the request
+
         bank (BankController): Bank controller
 
     Returns:

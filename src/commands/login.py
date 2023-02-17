@@ -1,12 +1,11 @@
-from ..controllers.bank_controller import BankController
 
-
-def login(data: dict, bank: BankController) -> dict:
+def login(data: dict, bank) -> dict:
     """
     Login to the bank
 
     Parameters:
         data (dict): Data from the request
+
         bank (BankController): Bank controller
 
     Returns:
